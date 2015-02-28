@@ -1,6 +1,7 @@
 package br.com.locadora.dto;
 
 import br.com.locadora.model.Filme;
+import br.com.locadora.model.Genero;
 import br.com.locadora.util.AbstractDto;
 import java.math.BigDecimal;
 import javax.validation.constraints.NotNull;
@@ -14,7 +15,7 @@ public class FilmeDto implements AbstractDto<Filme, FilmeDto> {
     @NotNull
     private String nome;
     @NotNull
-    private String genero;
+    private Genero genero;
     @NotNull
     private BigDecimal precoUnitario;
 
@@ -36,11 +37,11 @@ public class FilmeDto implements AbstractDto<Filme, FilmeDto> {
         return this;
     }
 
-    public String getGenero() {
+    public Genero getGenero() {
         return genero;
     }
 
-    public FilmeDto setGenero(String genero) {
+    public FilmeDto setGenero(Genero genero) {
         this.genero = genero;
         return this;
     }

@@ -11,7 +11,7 @@ public abstract class Filme_ {
 
 	public static volatile SingularAttribute<Filme, BigDecimal> precoUnitario;
 	public static volatile SingularAttribute<Filme, Long> id;
-	public static volatile SingularAttribute<Filme, String> genero;
+	public static volatile SingularAttribute<Filme, Genero> genero;
 	public static volatile SingularAttribute<Filme, String> nome;
 
 }

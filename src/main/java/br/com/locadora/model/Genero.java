@@ -1,15 +1,15 @@
 package br.com.locadora.model;
 
 public enum Genero {
-    ACAO("AC", "Ação"),
-    COMEDIA("CO", "Comédia"),
-    LANCAMENTO("LA", "Lançamento");
 
-    private final String sigla;
+    ACAO("Ação"),
+    COMEDIA("Comédia"),
+    DRAMA("Drama"),
+    LANCAMENTO("Lançamento");
+
     private final String descricao;
 
-    private Genero(final String sigla, final String descricao) {
-        this.sigla = sigla;
+    private Genero( String descricao) {
         this.descricao = descricao;
     }
 }

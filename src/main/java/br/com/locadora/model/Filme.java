@@ -4,6 +4,8 @@ import br.com.locadora.util.AbstractModel;
 import java.math.BigDecimal;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -21,8 +23,9 @@ public class Filme implements AbstractModel {
     private String nome;
 
     @NotNull
+    @Enumerated(EnumType.STRING)
     @Column(name = "GENERO")
-    private String genero;
+    private Genero genero;
 
     @NotNull
     @Column(name = "PRECO")
@@ -42,11 +45,11 @@ public class Filme implements AbstractModel {
         return this;
     }
 
-    public String getGenero() {
+    public Genero getGenero() {
         return genero;
     }
 
-    public Filme setGenero(String genero) {
+    public Filme setGenero(Genero genero) {
         this.genero = genero;
         return this;
     }
