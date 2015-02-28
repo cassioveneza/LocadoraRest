@@ -1,0 +1,9 @@
+br\com\locadora\model\Filme_.class
+br\com\locadora\model\Filme.class
+br\com\locadora\util\AbstractResource.class
+br\com\locadora\model\Genero.class
+br\com\locadora\util\AbstractModel.class
+br\com\locadora\util\AbstractDto.class
+br\com\locadora\resource\FilmeResource.class
+br\com\locadora\dto\FilmeDto.class
+br\com\locadora\util\ApplicationConfig.class
