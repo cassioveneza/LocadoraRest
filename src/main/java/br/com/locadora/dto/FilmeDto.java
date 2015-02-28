@@ -2,6 +2,7 @@ package br.com.locadora.dto;
 
 import br.com.locadora.model.Filme;
 import br.com.locadora.util.AbstractDto;
+import java.math.BigDecimal;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -15,7 +16,7 @@ public class FilmeDto implements AbstractDto<Filme, FilmeDto> {
     @NotNull
     private String genero;
     @NotNull
-    private Double precoUnitario;
+    private BigDecimal precoUnitario;
 
     public Long getId() {
         return id;
@@ -44,11 +45,11 @@ public class FilmeDto implements AbstractDto<Filme, FilmeDto> {
         return this;
     }
 
-    public Double getPrecoUnitario() {
+    public BigDecimal getPrecoUnitario() {
         return precoUnitario;
     }
 
-    public FilmeDto setPrecoUnitario(Double precoUnitario) {
+    public FilmeDto setPrecoUnitario(BigDecimal precoUnitario) {
         this.precoUnitario = precoUnitario;
         return this;
     }

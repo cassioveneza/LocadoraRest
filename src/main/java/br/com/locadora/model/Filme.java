@@ -1,6 +1,7 @@
 package br.com.locadora.model;
 
 import br.com.locadora.util.AbstractModel;
+import java.math.BigDecimal;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -25,7 +26,7 @@ public class Filme implements AbstractModel {
 
     @NotNull
     @Column(name = "PRECO")
-    private Double precoUnitario;
+    private BigDecimal precoUnitario;
 
     @Override
     public Long getId() {
@@ -50,11 +51,11 @@ public class Filme implements AbstractModel {
         return this;
     }
 
-    public Double getPrecoUnitario() {
+    public BigDecimal getPrecoUnitario() {
         return precoUnitario;
     }
 
-    public Filme setPrecoUnitario(Double precoUnitario) {
+    public Filme setPrecoUnitario(BigDecimal precoUnitario) {
         this.precoUnitario = precoUnitario;
         return this;
     }

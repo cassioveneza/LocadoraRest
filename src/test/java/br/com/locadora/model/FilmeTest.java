@@ -5,14 +5,10 @@
  */
 package br.com.locadora.model;
 
-import br.com.locadora.model.Filme;
-import junit.framework.Assert;
+import java.math.BigDecimal;
+import org.testng.Assert;
 import org.testng.annotations.*;
 
-/**
- *
- * @author user
- */
 public class FilmeTest {
 
     public FilmeTest() {
@@ -23,10 +19,9 @@ public class FilmeTest {
         Filme filme = new Filme()
                 .setNome("JOAO E MARIA")
                 .setGenero("LA")
-                .setPrecoUnitario(10d);
+                .setPrecoUnitario(BigDecimal.TEN);
         Assert.assertEquals(filme.getNome(), "JOAO E MARIA");
         Assert.assertEquals(filme.getGenero(), "LA");
-        
     }
 
     @BeforeClass

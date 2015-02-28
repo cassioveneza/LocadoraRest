@@ -1,5 +1,6 @@
 package br.com.locadora.model;
 
+import java.math.BigDecimal;
 import javax.annotation.Generated;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
@@ -8,7 +9,7 @@ import javax.persistence.metamodel.StaticMetamodel;
 @StaticMetamodel(Filme.class)
 public abstract class Filme_ {
 
-	public static volatile SingularAttribute<Filme, Double> precoUnitario;
+	public static volatile SingularAttribute<Filme, BigDecimal> precoUnitario;
 	public static volatile SingularAttribute<Filme, Long> id;
 	public static volatile SingularAttribute<Filme, String> genero;
 	public static volatile SingularAttribute<Filme, String> nome;
