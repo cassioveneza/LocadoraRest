@@ -1,7 +1,6 @@
 package br.com.locadora.model;
 
 public enum Genero {
-
     ACAO("AC", "Ação"),
     COMEDIA("CO", "Comédia"),
     LANCAMENTO("LA", "Lançamento");
