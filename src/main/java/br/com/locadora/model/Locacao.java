@@ -2,7 +2,7 @@ package br.com.locadora.model;
 
 import br.com.locadora.util.AbstractModel;
 import java.time.LocalDate;
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -14,7 +14,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.validation.constraints.NotNull;
 
 @Entity(name = "LOCACOES")
 public class Locacao implements AbstractModel {
@@ -26,12 +25,12 @@ public class Locacao implements AbstractModel {
     @Column(name = "DATA_LOCACAO")
     private LocalDate data;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "I_CLIENTES")
     private Cliente cliente;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "locacao")
-    private List<ItemLocacao> itens;
+    private List<ItemLocacao> itens = new ArrayList<>();
 
     @Override
     public Long getId() {

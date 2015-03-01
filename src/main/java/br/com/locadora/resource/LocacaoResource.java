@@ -19,8 +19,10 @@ public class LocacaoResource extends AbstractResource<Locacao, LocacaoDto> {
 
     @GET
     @Path("{id}")
-    public Locacao find(@PathParam("id") Long id) {
-        return super.find(id);
+    public LocacaoDto find(@PathParam("id") Long id) {
+        final Locacao locacao = super.find(id);
+        final LocacaoDto locacaoDto = new LocacaoDto().toRepresentation(locacao);
+        return locacaoDto;
     }
 
     @GET
