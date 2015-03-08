@@ -1,8 +1,10 @@
 C:\Users\user\Documents\NetBeansProjects\LocadoraRest\src\main\java\br\com\locadora\model\Filme.java
 C:\Users\user\Documents\NetBeansProjects\LocadoraRest\src\main\java\br\com\locadora\model\ItemLocacao.java
 C:\Users\user\Documents\NetBeansProjects\LocadoraRest\src\main\java\br\com\locadora\dto\ClienteDto.java
+C:\Users\user\Documents\NetBeansProjects\LocadoraRest\src\main\java\br\com\locadora\util\JsonDateSerializer.java
 C:\Users\user\Documents\NetBeansProjects\LocadoraRest\src\main\java\br\com\locadora\util\AbstractResource.java
 C:\Users\user\Documents\NetBeansProjects\LocadoraRest\src\main\java\br\com\locadora\util\ApplicationConfig.java
+C:\Users\user\Documents\NetBeansProjects\LocadoraRest\src\main\java\br\com\locadora\util\JsonDateDeserializer.java
 C:\Users\user\Documents\NetBeansProjects\LocadoraRest\src\main\java\br\com\locadora\model\FilmeRepository.java
 C:\Users\user\Documents\NetBeansProjects\LocadoraRest\src\main\java\br\com\locadora\util\AbstractRepository.java
 C:\Users\user\Documents\NetBeansProjects\LocadoraRest\src\main\java\br\com\locadora\util\AbstractModel.java

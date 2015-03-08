@@ -4,6 +4,10 @@ import br.com.locadora.model.Cliente;
 import br.com.locadora.model.ItemLocacao;
 import br.com.locadora.model.Locacao;
 import br.com.locadora.util.AbstractDto;
+import br.com.locadora.util.JsonDateDeserializer;
+import br.com.locadora.util.JsonDateSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,8 +17,13 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class LocacaoDto implements AbstractDto<Locacao, LocacaoDto> {
 
     private Long id;
+
+    @JsonDeserialize(using = JsonDateDeserializer.class)
+    @JsonSerialize(using = JsonDateSerializer.class)
     private LocalDate data;
+
     private Cliente cliente;
+
     private List<ItemLocacao> itens = new ArrayList<>();
 
     public Long getId() {
@@ -68,7 +77,6 @@ public class LocacaoDto implements AbstractDto<Locacao, LocacaoDto> {
 //        entity.getItensLocacao().stream().forEach(
 //                item -> locacao.adicionaItemLocacao(item)
 //        );
-
         return locacao;
     }
 
@@ -81,7 +89,6 @@ public class LocacaoDto implements AbstractDto<Locacao, LocacaoDto> {
 //        getItensLocacao().stream().forEach(item
 //                -> locacao.adicionaItemLocacao(item)
 //        );
-
         return locacao;
     }
 

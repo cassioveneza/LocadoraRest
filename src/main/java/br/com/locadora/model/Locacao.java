@@ -1,6 +1,10 @@
 package br.com.locadora.model;
 
 import br.com.locadora.util.AbstractModel;
+import br.com.locadora.util.JsonDateDeserializer;
+import br.com.locadora.util.JsonDateSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +18,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
 @Entity(name = "LOCACOES")
 public class Locacao implements AbstractModel {
@@ -22,13 +27,16 @@ public class Locacao implements AbstractModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @JsonDeserialize(using = JsonDateDeserializer.class)
+    @JsonSerialize(using = JsonDateSerializer.class)
     @Column(name = "DATA_LOCACAO")
     private LocalDate data;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "I_CLIENTES")
     private Cliente cliente;
 
+    @Transient
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "locacao")
     private List<ItemLocacao> itens = new ArrayList<>();
 
