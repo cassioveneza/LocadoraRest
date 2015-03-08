@@ -2,6 +2,7 @@ br\com\locadora\dto\ItemLocacaoDto.class
 br\com\locadora\model\ItemLocacao.class
 br\com\locadora\model\ItemLocacao_.class
 br\com\locadora\dto\FilmeDto.class
+br\com\locadora\model\FilmeRepository.class
 br\com\locadora\resource\ClienteResource.class
 br\com\locadora\util\AbstractResource.class
 br\com\locadora\util\AbstractModel.class
@@ -18,4 +19,5 @@ br\com\locadora\util\ApplicationConfig.class
 br\com\locadora\resource\LocacaoResource.class
 br\com\locadora\dto\ClienteDto.class
 br\com\locadora\util\AbstractDto.class
+br\com\locadora\util\AbstractRepository.class
 br\com\locadora\model\Locacao_.class
