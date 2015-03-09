@@ -6,8 +6,8 @@ import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
-public class ItemLocacaoDto implements AbstractDto<Cliente, ItemLocacaoDto> {
-
+public class ItemLocacaoDto /* implements AbstractDto<Cliente, ItemLocacaoDto>*/ {
+/*
     @NotNull
     private Long id;
     @NotNull
@@ -61,11 +61,11 @@ public class ItemLocacaoDto implements AbstractDto<Cliente, ItemLocacaoDto> {
                 .setEndereco(entity.getEndereco());
     }
 
-    public Cliente fromRepresentation() {
+    public Cliente fromRepresentation(ItemLocacaoDto dto) {
         return new Cliente()
                 .setNome(this.getNome())
                 .setTelefone(this.getTelefone())
                 .setEndereco(this.getEndereco());
     }
-
+*/
 }

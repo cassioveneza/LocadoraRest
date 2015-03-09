@@ -8,8 +8,8 @@ import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
-public class FilmeDto implements AbstractDto<Filme, FilmeDto> {
-
+public class FilmeDto /*implements AbstractDto<Filme, FilmeDto>*/ {
+/*
     @NotNull
     private Long id;
     @NotNull
@@ -63,11 +63,11 @@ public class FilmeDto implements AbstractDto<Filme, FilmeDto> {
                 .setPrecoUnitario(entity.getPrecoUnitario());
     }
 
-    public Filme fromRepresentation() {
+    public Filme fromRepresentation(FilmeDto dto) {
         return new Filme()
                 .setNome(this.getNome())
                 .setGenero(this.getGenero())
                 .setPrecoUnitario(this.getPrecoUnitario());
     }
-
+*/
 }

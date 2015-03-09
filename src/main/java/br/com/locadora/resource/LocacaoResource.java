@@ -11,8 +11,8 @@ import br.com.locadora.util.AbstractResource;
 @Consumes("application/json")
 @Stateless
 @Path("locacoes")
-public class LocacaoResource extends AbstractResource<Locacao, LocacaoDto> {
-
+public class LocacaoResource /*extends AbstractResource<Locacao, LocacaoDto>*/ {
+/*
     public LocacaoResource() {
         super(Locacao.class);
     }
@@ -33,7 +33,7 @@ public class LocacaoResource extends AbstractResource<Locacao, LocacaoDto> {
     @POST
     @Override
     public LocacaoDto create(LocacaoDto dto) {
-        final Locacao locacao = dto.fromRepresentation();
+        final Locacao locacao = dto.fromRepresentation(dto);
         em.persist(locacao);
         return dto.toRepresentation(locacao);
     }
@@ -41,7 +41,7 @@ public class LocacaoResource extends AbstractResource<Locacao, LocacaoDto> {
     @PUT
     @Path("{id}")
     public LocacaoDto update(@PathParam("id") Long id, LocacaoDto dto) {
-        final Locacao locacao = dto.fromRepresentation();
+        final Locacao locacao = dto.fromRepresentation(dto);
         return dto.toRepresentation(em.merge(locacao));
     }
 
@@ -50,5 +50,5 @@ public class LocacaoResource extends AbstractResource<Locacao, LocacaoDto> {
     public void remove(@PathParam("id") Long id) {
         super.removeById(id);
     }
-
+*/
 }

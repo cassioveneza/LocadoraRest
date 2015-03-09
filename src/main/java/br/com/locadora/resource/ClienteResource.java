@@ -5,33 +5,35 @@ import javax.ejb.Stateless;
 import javax.ws.rs.*;
 import br.com.locadora.dto.ClienteDto;
 import br.com.locadora.model.Cliente;
-import br.com.locadora.util.AbstractResource;
+import br.com.locadora.util.AbstractRepository;
 
 @Produces("application/json")
 @Consumes("application/json")
 @Stateless
 @Path("clientes")
-public class ClienteResource extends AbstractResource<Cliente, ClienteDto> {
+public class ClienteResource extends AbstractRepository<Cliente> {
+
+    private ClienteDto clienteDto;
 
     public ClienteResource() {
         super(Cliente.class);
+        clienteDto = new ClienteDto();
     }
 
     @GET
     @Path("{id}")
-    public Cliente find(@PathParam("id") Long id) {
-        return super.find(id);
+    public ClienteDto find(@PathParam("id") Long id) {
+        return clienteDto.toRepresentation(super.find(id));
     }
 
     @GET
-    public List<Cliente> findAll() {
-        return super.findAll();
+    public List<ClienteDto> findAllDTO() {
+        return clienteDto.toRepresentation(super.findAll());
     }
 
     @POST
-    @Override
     public ClienteDto create(ClienteDto dto) {
-        final Cliente cliente = dto.fromRepresentation();
+        final Cliente cliente = dto.fromRepresentation(dto);
         em.persist(cliente);
         return dto.toRepresentation(cliente);
     }
@@ -39,7 +41,7 @@ public class ClienteResource extends AbstractResource<Cliente, ClienteDto> {
     @PUT
     @Path("{id}")
     public ClienteDto update(@PathParam("id") Long id, ClienteDto dto) {
-        final Cliente cliente = dto.fromRepresentation();
+        final Cliente cliente = dto.fromRepresentation(dto);
         return dto.toRepresentation(em.merge(cliente));
     }
 

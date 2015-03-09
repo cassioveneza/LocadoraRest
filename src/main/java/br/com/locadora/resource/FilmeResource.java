@@ -15,7 +15,7 @@ import javax.ws.rs.core.Response;
 @Consumes("application/json")
 @Stateless
 public class FilmeResource {
-    
+/*    
 //    @Inject
 //    private FilmeRepository filmeRepository;
 
@@ -52,5 +52,5 @@ public class FilmeResource {
 //    public void remove(@PathParam("id") Long id) {
 //        super.removeById(id);
 //    }
-
+*/
 }

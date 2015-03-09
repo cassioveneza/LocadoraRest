@@ -6,7 +6,7 @@ import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
-public class ClienteDto implements AbstractDto<Cliente, ClienteDto> {
+public class ClienteDto extends AbstractDto<Cliente, ClienteDto> {
 
     @NotNull
     private Long id;
@@ -53,15 +53,17 @@ public class ClienteDto implements AbstractDto<Cliente, ClienteDto> {
         return this;
     }
 
+    @Override
     public ClienteDto toRepresentation(Cliente entity) {
         return new ClienteDto()
-                .setId(id)
+                .setId(entity.getId())
                 .setNome(entity.getNome())
                 .setTelefone(entity.getTelefone())
                 .setEndereco(entity.getEndereco());
     }
 
-    public Cliente fromRepresentation() {
+    @Override
+    public Cliente fromRepresentation(ClienteDto dto) {
         return new Cliente()
                 .setNome(this.getNome())
                 .setTelefone(this.getTelefone())

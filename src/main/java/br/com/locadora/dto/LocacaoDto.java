@@ -14,8 +14,8 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
-public class LocacaoDto implements AbstractDto<Locacao, LocacaoDto> {
-
+public class LocacaoDto /*implements AbstractDto<Locacao, LocacaoDto>*/ {
+/*
     private Long id;
 
     @JsonDeserialize(using = JsonDateDeserializer.class)
@@ -81,7 +81,7 @@ public class LocacaoDto implements AbstractDto<Locacao, LocacaoDto> {
     }
 
     @Override
-    public Locacao fromRepresentation() {
+    public Locacao fromRepresentation(LocacaoDto dto) {
         final Locacao locacao = new Locacao()
                 .setData(this.getData())
                 .setCliente(this.getCliente());
@@ -91,5 +91,5 @@ public class LocacaoDto implements AbstractDto<Locacao, LocacaoDto> {
 //        );
         return locacao;
     }
-
+*/
 }
