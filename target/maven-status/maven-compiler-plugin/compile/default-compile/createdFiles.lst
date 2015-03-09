@@ -15,6 +15,7 @@ br\com\locadora\model\Filme_.class
 br\com\locadora\model\Cliente.class
 br\com\locadora\resource\FilmeResource.class
 br\com\locadora\util\LocalDateConverter.class
+br\com\locadora\dto\ClienteDto$DtoBuilder.class
 br\com\locadora\util\JsonDateDeserializer.class
 br\com\locadora\model\Filme.class
 br\com\locadora\util\ApplicationConfig.class
@@ -23,3 +24,5 @@ br\com\locadora\dto\ClienteDto.class
 br\com\locadora\util\AbstractDto.class
 br\com\locadora\util\AbstractRepository.class
 br\com\locadora\model\Locacao_.class
+br\com\locadora\model\Cliente$1.class
+br\com\locadora\model\Cliente$Builder.class

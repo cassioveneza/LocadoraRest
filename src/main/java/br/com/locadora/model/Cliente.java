@@ -27,6 +27,9 @@ public class Cliente implements AbstractModel {
     @Column(name = "ENDERECO")
     private String endereco;
 
+    private Cliente() {
+    }
+
     @Override
     public Long getId() {
         return id;
@@ -36,27 +39,54 @@ public class Cliente implements AbstractModel {
         return nome;
     }
 
-    public Cliente setNome(String nome) {
+    private void setNome(String nome) {
         this.nome = nome;
-        return this;
     }
 
     public String getTelefone() {
         return telefone;
     }
 
-    public Cliente setTelefone(String telefone) {
+    private void setTelefone(String telefone) {
         this.telefone = telefone;
-        return this;
     }
 
     public String getEndereco() {
         return endereco;
     }
 
-    public Cliente setEndereco(String endereco) {
+    private void setEndereco(String endereco) {
         this.endereco = endereco;
-        return this;
     }
 
+    public static class Builder {
+        private final Cliente cliente;
+        
+        private Builder() {
+            cliente = new Cliente();
+        }
+
+        public static Builder create() {
+            return new Builder();
+        }
+
+        public Cliente build() {
+            return cliente;
+        }
+
+        public Builder nome(String nome) {
+            cliente.setNome(nome);
+            return this;
+        }
+
+        public Builder telefone(String telefone) {
+            cliente.setTelefone(telefone);
+            return this;
+        }
+
+        public Builder endereco(String endereco) {
+            cliente.setEndereco(endereco);
+            return this;
+        }
+    }
 }

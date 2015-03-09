@@ -21,53 +21,88 @@ public class ClienteDto extends AbstractDto<Cliente, ClienteDto> {
         return id;
     }
 
-    public ClienteDto setId(Long id) {
+    private void setId(Long id) {
         this.id = id;
-        return this;
     }
 
     public String getNome() {
         return nome;
     }
 
-    public ClienteDto setNome(String nome) {
+    private void setNome(String nome) {
         this.nome = nome;
-        return this;
     }
 
     public String getTelefone() {
         return telefone;
     }
 
-    public ClienteDto setTelefone(String telefone) {
+    private void setTelefone(String telefone) {
         this.telefone = telefone;
-        return this;
     }
 
     public String getEndereco() {
         return endereco;
     }
 
-    public ClienteDto setEndereco(String endereco) {
+    private void setEndereco(String endereco) {
         this.endereco = endereco;
-        return this;
+    }
+
+    public static class DtoBuilder {
+
+        private final ClienteDto clienteDto;
+
+        private DtoBuilder() {
+            clienteDto = new ClienteDto();
+        }
+
+        public static DtoBuilder create() {
+            return new DtoBuilder();
+        }
+
+        public ClienteDto build() {
+            return clienteDto;
+        }
+
+        public DtoBuilder id(Long id) {
+            clienteDto.setId(id);
+            return this;
+        }
+
+        public DtoBuilder nome(String nome) {
+            clienteDto.setNome(nome);
+            return this;
+        }
+
+        public DtoBuilder telefone(String telefone) {
+            clienteDto.setTelefone(telefone);
+            return this;
+        }
+
+        public DtoBuilder endereco(String endereco) {
+            clienteDto.setEndereco(endereco);
+            return this;
+        }
     }
 
     @Override
-    public ClienteDto toRepresentation(Cliente entity) {
-        return new ClienteDto()
-                .setId(entity.getId())
-                .setNome(entity.getNome())
-                .setTelefone(entity.getTelefone())
-                .setEndereco(entity.getEndereco());
+    public ClienteDto toRepresentation(Cliente cliente) {
+        return ClienteDto.DtoBuilder.create()
+                .id(cliente.getId())
+                .nome(cliente.getNome())
+                .telefone(cliente.getTelefone())
+                .endereco(cliente.getEndereco())
+                .build();
     }
 
     @Override
     public Cliente fromRepresentation(ClienteDto dto) {
-        return new Cliente()
-                .setNome(this.getNome())
-                .setTelefone(this.getTelefone())
-                .setEndereco(this.getEndereco());
+        return Cliente.Builder.create()
+                .nome(dto.getNome())
+                .telefone(dto.getTelefone())
+                .endereco(dto.getEndereco())
+                .build();
     }
 
 }

@@ -33,16 +33,16 @@ public class ClienteResource extends AbstractRepository<Cliente> {
 
     @POST
     public ClienteDto create(ClienteDto dto) {
-        final Cliente cliente = dto.fromRepresentation(dto);
+        final Cliente cliente = clienteDto.fromRepresentation(dto);
         em.persist(cliente);
-        return dto.toRepresentation(cliente);
+        return clienteDto.toRepresentation(cliente);
     }
 
     @PUT
     @Path("{id}")
     public ClienteDto update(@PathParam("id") Long id, ClienteDto dto) {
-        final Cliente cliente = dto.fromRepresentation(dto);
-        return dto.toRepresentation(em.merge(cliente));
+        final Cliente cliente = clienteDto.fromRepresentation(dto);
+        return clienteDto.toRepresentation(em.merge(cliente));
     }
 
     @DELETE
