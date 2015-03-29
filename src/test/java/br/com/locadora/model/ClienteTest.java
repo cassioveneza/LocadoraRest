@@ -12,7 +12,7 @@ public class ClienteTest {
         final String telefone = "9944-5588";
         final String endereco = "RUA GERAL";
 
-        Cliente cliente = Cliente.Builder.create()
+        final Cliente cliente = Cliente.Builder.create()
                 .nome(nome)
                 .telefone(telefone)
                 .endereco(endereco)
