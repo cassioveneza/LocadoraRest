@@ -17,6 +17,9 @@ public class ClienteDto extends AbstractDto<Cliente, ClienteDto> {
     @NotNull
     private String endereco;
 
+    public ClienteDto() {
+    }
+
     public Long getId() {
         return id;
     }

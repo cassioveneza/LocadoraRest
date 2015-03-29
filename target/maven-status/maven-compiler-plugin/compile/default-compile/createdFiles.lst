@@ -1,4 +1,5 @@
 br\com\locadora\dto\ItemLocacaoDto.class
+br\com\locadora\model\ClienteRepository.class
 br\com\locadora\model\ItemLocacao.class
 br\com\locadora\model\ItemLocacao_.class
 br\com\locadora\dto\FilmeDto.class

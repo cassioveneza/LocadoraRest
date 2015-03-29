@@ -2,36 +2,32 @@ package br.com.locadora.resource;
 
 import br.com.locadora.dto.ClienteDto;
 import br.com.locadora.model.Cliente;
-import br.com.locadora.util.AbstractRepository;
+import br.com.locadora.model.ClienteRepository;
+import br.com.locadora.util.AbstractResource;
 import java.util.List;
 import javax.ejb.Stateless;
-import javax.ws.rs.Consumes;
+import javax.inject.Inject;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 
-@Produces("application/json")
-@Consumes("application/json")
-@Stateless
 @Path("clientes")
-public class ClienteResource extends AbstractRepository<Cliente> {
+@Stateless
+public class ClienteResource extends AbstractResource {
 
+    @Inject
+    private ClienteRepository clienteRepository;
+    @Inject
     private ClienteDto clienteDto;
-
-    public ClienteResource() {
-        super(Cliente.class);
-        clienteDto = new ClienteDto();
-    }
 
     @GET
     @Path("{id}")
     public Response find(@PathParam("id") Long id) {
-        final Cliente cliente = super.find(id);
+        final Cliente cliente = clienteRepository.find(id);
         if (cliente == null) {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
@@ -40,7 +36,7 @@ public class ClienteResource extends AbstractRepository<Cliente> {
 
     @GET
     public Response findAll() {
-        final List<ClienteDto> clientes = clienteDto.toRepresentation(super.findAllRepository());
+        final List<ClienteDto> clientes = clienteDto.toRepresentation(clienteRepository.findAll());
         return Response.ok(clientes).build();
     }
 
@@ -61,7 +57,7 @@ public class ClienteResource extends AbstractRepository<Cliente> {
     @DELETE
     @Path("{id}")
     public Response remove(@PathParam("id") Long id) {
-        super.removeById(id);
+        clienteRepository.removeById(id);
         return Response.noContent().build();
     }
 
