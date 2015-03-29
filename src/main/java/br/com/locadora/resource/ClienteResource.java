@@ -1,11 +1,19 @@
 package br.com.locadora.resource;
 
-import java.util.List;
-import javax.ejb.Stateless;
-import javax.ws.rs.*;
 import br.com.locadora.dto.ClienteDto;
 import br.com.locadora.model.Cliente;
 import br.com.locadora.util.AbstractRepository;
+import java.util.List;
+import javax.ejb.Stateless;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.Response;
 
 @Produces("application/json")
 @Consumes("application/json")
@@ -22,33 +30,39 @@ public class ClienteResource extends AbstractRepository<Cliente> {
 
     @GET
     @Path("{id}")
-    public ClienteDto find(@PathParam("id") Long id) {
-        return clienteDto.toRepresentation(super.find(id));
+    public Response find(@PathParam("id") Long id) {
+        final Cliente cliente = super.find(id);
+        if (cliente == null) {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+        return Response.ok(clienteDto.toRepresentation(cliente)).build();
     }
 
     @GET
-    public List<ClienteDto> findAllDTO() {
-        return clienteDto.toRepresentation(super.findAll());
+    public Response findAll() {
+        final List<ClienteDto> clientes = clienteDto.toRepresentation(super.findAllRepository());
+        return Response.ok(clientes).build();
     }
 
     @POST
-    public ClienteDto create(ClienteDto dto) {
+    public Response create(ClienteDto dto) {
         final Cliente cliente = clienteDto.fromRepresentation(dto);
         em.persist(cliente);
-        return clienteDto.toRepresentation(cliente);
+        return Response.created(null).entity(clienteDto.toRepresentation(cliente)).build();
     }
 
     @PUT
     @Path("{id}")
-    public ClienteDto update(@PathParam("id") Long id, ClienteDto dto) {
+    public Response update(@PathParam("id") Long id, ClienteDto dto) {
         final Cliente cliente = clienteDto.fromRepresentation(dto);
-        return clienteDto.toRepresentation(em.merge(cliente));
+        return Response.created(null).entity(clienteDto.toRepresentation(em.merge(cliente))).build();
     }
 
     @DELETE
     @Path("{id}")
-    public void remove(@PathParam("id") Long id) {
+    public Response remove(@PathParam("id") Long id) {
         super.removeById(id);
+        return Response.noContent().build();
     }
 
 }

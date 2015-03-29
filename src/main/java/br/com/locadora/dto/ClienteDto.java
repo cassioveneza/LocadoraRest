@@ -51,14 +51,21 @@ public class ClienteDto extends AbstractDto<Cliente, ClienteDto> {
 
     public static class DtoBuilder {
 
-        private final ClienteDto clienteDto;
+        private static ClienteDto clienteDto;
 
         private DtoBuilder() {
             clienteDto = new ClienteDto();
         }
 
         public static DtoBuilder create() {
-            return new DtoBuilder();
+            final DtoBuilder builder = new DtoBuilder();
+            return builder;
+        }
+        
+        public static DtoBuilder from(ClienteDto cliente) {
+            final DtoBuilder dto = new DtoBuilder();
+            dto.clienteDto = cliente;
+            return dto;
         }
 
         public ClienteDto build() {
@@ -99,6 +106,7 @@ public class ClienteDto extends AbstractDto<Cliente, ClienteDto> {
     @Override
     public Cliente fromRepresentation(ClienteDto dto) {
         return Cliente.Builder.create()
+                .id(dto.getId())
                 .nome(dto.getNome())
                 .telefone(dto.getTelefone())
                 .endereco(dto.getEndereco())

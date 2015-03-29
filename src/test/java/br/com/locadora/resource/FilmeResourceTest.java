@@ -1,24 +1,19 @@
 package br.com.locadora.resource;
 
-import br.com.locadora.dto.FilmeDto;
-import br.com.locadora.model.Filme;
-import java.util.List;
-import javax.ejb.embeddable.EJBContainer;
-import org.testng.annotations.*;
-import static org.testng.Assert.*;
+//import org.testng.annotations.*;
 
 public class FilmeResourceTest {
 
     public FilmeResourceTest() {
     }
 
-    @BeforeClass
-    public static void setUpClass() {
-    }
-
-    @AfterClass
-    public static void tearDownClass() {
-    }
+//    @BeforeClass
+//    public static void setUpClass() {
+//    }
+//
+//    @AfterClass
+//    public static void tearDownClass() {
+//    }
 
 //    @Test(enabled = false)
 //    public void testCreate() throws Exception {

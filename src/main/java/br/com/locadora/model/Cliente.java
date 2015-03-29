@@ -35,6 +35,10 @@ public class Cliente implements AbstractModel {
         return id;
     }
 
+    private void setId(Long id) {
+        this.id = id;
+    }
+
     public String getNome() {
         return nome;
     }
@@ -72,6 +76,11 @@ public class Cliente implements AbstractModel {
 
         public Cliente build() {
             return cliente;
+        }
+
+        public Builder id(Long id) {
+            cliente.setId(id);
+            return this;
         }
 
         public Builder nome(String nome) {

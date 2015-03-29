@@ -26,7 +26,7 @@ public abstract class AbstractRepository <T extends AbstractModel> {
         return em.find(entityClass, id);
     }
 
-    public List<T> findAll() {
+    public List<T> findAllRepository() {
         javax.persistence.criteria.CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
         cq.select(cq.from(entityClass));
         return em.createQuery(cq).getResultList();
