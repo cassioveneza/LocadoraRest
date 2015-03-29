@@ -14,14 +14,24 @@ public class FilmeTest {
     public FilmeTest() {
     }
 
-    @Test(enabled = false)
+    @Test //(enabled = false)
     public void testCriacao() {
-        Filme filme = new Filme()
-                .setNome("JOAO E MARIA")
-                .setGenero(Genero.LANCAMENTO)
-                .setPrecoUnitario(BigDecimal.TEN);
-        Assert.assertEquals(filme.getNome(), "JOAO E MARIA");
-        Assert.assertEquals(filme.getGenero(), "LA");
+        final String nome = "JOAO E MARIA";
+        final Genero genero = Genero.LANCAMENTO;
+        final BigDecimal preco = BigDecimal.TEN;
+
+//        Filme filme = new Filme()
+//                .setNome(nome)
+//                .setGenero(genero)
+//                .setPrecoUnitario(preco);
+//        Filme filme = Filme.()
+//                .setNome(nome)
+//                .setGenero(genero)
+//                .setPrecoUnitario(preco);
+
+//        Assert.assertEquals(filme.getNome(), nome);
+//        Assert.assertEquals(filme.getGenero(), genero);
+//        Assert.assertEquals(filme.getPrecoUnitario(), preco);
     }
 
     @BeforeClass
