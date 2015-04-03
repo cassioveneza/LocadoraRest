@@ -26,7 +26,7 @@ public class ClienteResource extends AbstractResource {
 
     @GET
     @Path("{id}")
-    public Response find(@PathParam("id") Long id) {
+    public Response find(@PathParam("id") long id) {
         final Cliente cliente = clienteRepository.find(id);
         if (cliente == null) {
             return Response.status(Response.Status.NOT_FOUND).build();
@@ -49,14 +49,14 @@ public class ClienteResource extends AbstractResource {
 
     @PUT
     @Path("{id}")
-    public Response update(@PathParam("id") Long id, ClienteDto dto) {
+    public Response update(@PathParam("id") long id, ClienteDto dto) {
         final Cliente cliente = clienteDto.fromRepresentation(dto);
         return Response.created(null).entity(clienteDto.toRepresentation(em.merge(cliente))).build();
     }
 
     @DELETE
     @Path("{id}")
-    public Response remove(@PathParam("id") Long id) {
+    public Response remove(@PathParam("id") long id) {
         clienteRepository.removeById(id);
         return Response.noContent().build();
     }

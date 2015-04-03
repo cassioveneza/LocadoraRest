@@ -16,7 +16,7 @@ public class Filme implements AbstractModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
     @NotNull
     @Column(name = "NOME")
@@ -32,7 +32,7 @@ public class Filme implements AbstractModel {
     private BigDecimal precoUnitario;
 
     @Override
-    public Long getId() {
+    public long getId() {
         return id;
     }
 

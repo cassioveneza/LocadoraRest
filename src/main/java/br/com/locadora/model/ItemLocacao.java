@@ -17,7 +17,7 @@ public class ItemLocacao implements AbstractModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, optional = false)
     @JoinColumn(name = "I_LOCACOES", nullable = false)
@@ -28,7 +28,7 @@ public class ItemLocacao implements AbstractModel {
     private Filme filme;
 
     @Override
-    public Long getId() {
+    public long getId() {
         return id;
     }
 

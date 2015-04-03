@@ -2,14 +2,16 @@ package br.com.locadora.dto;
 
 import br.com.locadora.model.Cliente;
 import br.com.locadora.util.AbstractDto;
+import java.util.ArrayList;
+import java.util.List;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
-public class ClienteDto extends AbstractDto<Cliente, ClienteDto> {
+public class ClienteDto /*extends AbstractDto<Cliente, ClienteDto>*/ {
 
     @NotNull
-    private Long id;
+    private long id;
     @NotNull
     private String nome;
     @NotNull
@@ -20,11 +22,11 @@ public class ClienteDto extends AbstractDto<Cliente, ClienteDto> {
     public ClienteDto() {
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    private void setId(Long id) {
+    private void setId(long id) {
         this.id = id;
     }
 
@@ -57,25 +59,26 @@ public class ClienteDto extends AbstractDto<Cliente, ClienteDto> {
         private static ClienteDto clienteDto;
 
         private DtoBuilder() {
-            clienteDto = new ClienteDto();
+            this.clienteDto = new ClienteDto();
+        }
+
+        private DtoBuilder(ClienteDto clienteDto) {
+            this.clienteDto = clienteDto;
         }
 
         public static DtoBuilder create() {
-            final DtoBuilder builder = new DtoBuilder();
-            return builder;
+            return new DtoBuilder();
         }
         
         public static DtoBuilder from(ClienteDto cliente) {
-            final DtoBuilder dto = new DtoBuilder();
-            dto.clienteDto = cliente;
-            return dto;
+            return new DtoBuilder(cliente);
         }
 
         public ClienteDto build() {
             return clienteDto;
         }
 
-        public DtoBuilder id(Long id) {
+        public DtoBuilder id(long id) {
             clienteDto.setId(id);
             return this;
         }
@@ -96,7 +99,7 @@ public class ClienteDto extends AbstractDto<Cliente, ClienteDto> {
         }
     }
 
-    @Override
+//    @Override
     public ClienteDto toRepresentation(Cliente cliente) {
         return ClienteDto.DtoBuilder.create()
                 .id(cliente.getId())
@@ -106,7 +109,7 @@ public class ClienteDto extends AbstractDto<Cliente, ClienteDto> {
                 .build();
     }
 
-    @Override
+//    @Override
     public Cliente fromRepresentation(ClienteDto dto) {
         return Cliente.Builder.create()
                 .id(dto.getId())
@@ -114,6 +117,14 @@ public class ClienteDto extends AbstractDto<Cliente, ClienteDto> {
                 .telefone(dto.getTelefone())
                 .endereco(dto.getEndereco())
                 .build();
+    }
+    
+    public List<ClienteDto> toRepresentation(List<Cliente> lista) {
+        final List<ClienteDto> listaDto = new ArrayList<>();
+        lista.stream().forEach(registro -> {
+            listaDto.add(this.toRepresentation(registro));
+        });
+        return listaDto;
     }
 
 }

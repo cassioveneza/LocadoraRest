@@ -30,8 +30,6 @@ public class ApplicationConfig extends Application {
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(br.com.locadora.resource.ClienteResource.class);
-        resources.add(br.com.locadora.resource.FilmeResource.class);
-        resources.add(br.com.locadora.resource.LocacaoResource.class);
     }
     
 }

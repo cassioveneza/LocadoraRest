@@ -13,7 +13,7 @@ public class Cliente implements AbstractModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
     @NotNull
     @Column(name = "NOME")
@@ -31,11 +31,11 @@ public class Cliente implements AbstractModel {
     }
 
     @Override
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    private void setId(Long id) {
+    private void setId(long id) {
         this.id = id;
     }
 
@@ -86,7 +86,7 @@ public class Cliente implements AbstractModel {
             return cliente;
         }
 
-        public Builder id(Long id) {
+        public Builder id(long id) {
             cliente.setId(id);
             return this;
         }
