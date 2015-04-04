@@ -1,4 +1,3 @@
-br\com\locadora\resource\FilmeResourceTest.class
+br\com\locadora\resource\AbstractResourceIT.class
 br\com\locadora\model\ClienteTest.class
 br\com\locadora\resource\ClienteResourceIT.class
-br\com\locadora\model\FilmeTest.class

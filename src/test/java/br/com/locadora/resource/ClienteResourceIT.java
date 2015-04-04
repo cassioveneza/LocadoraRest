@@ -2,32 +2,23 @@ package br.com.locadora.resource;
 
 import br.com.locadora.dto.ClienteDto;
 import br.com.locadora.model.Cliente;
-import java.net.MalformedURLException;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.RunAsClient;
-import org.jboss.shrinkwrap.api.ShrinkWrap;
-import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 @Test(groups = "integration")
 public class ClienteResourceIT extends AbstractResourceIT {
-
-    @Deployment
-    public static WebArchive createDeployment() {
-        return ShrinkWrap.create(WebArchive.class).
-                addPackages(true, Cliente.class.getPackage());
-//                        , ClienteDto.class.getPackage(), ClienteResource.class.getPackage()
-    }
+    
+    private final String PATH = "/clientes";
 
     @BeforeClass
-    private void createTarget() throws MalformedURLException {
-        super.createTarget("clientes");
+    private void beforeClass() {
+        super.createTarget(PATH);
     }
 
     @Test
@@ -77,12 +68,11 @@ public class ClienteResourceIT extends AbstractResourceIT {
         response = targetResource.request().get();
         Assert.assertEquals(response.getStatus(), Response.Status.NOT_FOUND.getStatusCode());
     }
-    
-    
+
     @Test
     @RunAsClient
     public void testMethodsXXX() throws Exception {
-        
+
     }
 
 }
