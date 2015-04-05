@@ -1,7 +1,5 @@
 package br.com.locadora.resource;
 
-import java.net.URI;
-
 public class Api {
 
     private final static String URL_BASE = "http://localhost:8080/app/webresources";
