@@ -1,11 +1,12 @@
 package br.com.locadora.dto;
 
 import br.com.locadora.model.Cliente;
-import br.com.locadora.util.AbstractDto;
+import br.com.locadora.model.Sexo;
 import java.util.ArrayList;
 import java.util.List;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 @XmlRootElement
 public class ClienteDto /*extends AbstractDto<Cliente, ClienteDto>*/ {
@@ -15,6 +16,7 @@ public class ClienteDto /*extends AbstractDto<Cliente, ClienteDto>*/ {
     @NotNull
     private String nome;
     @NotNull
+    private Sexo sexo;
     private String telefone;
     @NotNull
     private String endereco;
@@ -38,6 +40,14 @@ public class ClienteDto /*extends AbstractDto<Cliente, ClienteDto>*/ {
         this.nome = nome;
     }
 
+    public Sexo getSexo() {
+        return sexo;
+    }
+
+    private void setSexo(Sexo sexo) {
+        this.sexo = sexo;
+    }
+    
     public String getTelefone() {
         return telefone;
     }
@@ -88,6 +98,11 @@ public class ClienteDto /*extends AbstractDto<Cliente, ClienteDto>*/ {
             return this;
         }
 
+        public DtoBuilder sexo(Sexo sexo) {
+            clienteDto.setSexo(sexo);
+            return this;
+        }
+        
         public DtoBuilder telefone(String telefone) {
             clienteDto.setTelefone(telefone);
             return this;
@@ -104,6 +119,7 @@ public class ClienteDto /*extends AbstractDto<Cliente, ClienteDto>*/ {
         return ClienteDto.DtoBuilder.create()
                 .id(cliente.getId())
                 .nome(cliente.getNome())
+                .sexo(cliente.getSexo())
                 .telefone(cliente.getTelefone())
                 .endereco(cliente.getEndereco())
                 .build();
@@ -114,6 +130,7 @@ public class ClienteDto /*extends AbstractDto<Cliente, ClienteDto>*/ {
         return Cliente.Builder.create()
                 .id(dto.getId())
                 .nome(dto.getNome())
+                .sexo(dto.getSexo())
                 .telefone(dto.getTelefone())
                 .endereco(dto.getEndereco())
                 .build();

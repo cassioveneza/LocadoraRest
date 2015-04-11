@@ -52,6 +52,23 @@
             <displayName>Deploy no Wildfly</displayName>
             <goals>
                 <goal>wildfly:deploy</goal>
+                
+                
             </goals>
+            <properties>
+                <skipTests>true</skipTests>
+            </properties>
+        </action>
+        <action>
+            <actionName>CUSTOM-Construir sem Testes</actionName>
+            <displayName>Construir sem Testes</displayName>
+            <goals>
+                <goal>clean</goal>
+                <goal>install</goal>
+                
+            </goals>
+            <properties>
+                <skipTests>true</skipTests>
+            </properties>
         </action>
     </actions>

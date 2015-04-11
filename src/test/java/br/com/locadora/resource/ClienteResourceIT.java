@@ -2,6 +2,7 @@ package br.com.locadora.resource;
 
 import br.com.locadora.dto.ClienteDto;
 import br.com.locadora.model.Cliente;
+import br.com.locadora.model.Sexo;
 import java.net.URI;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
@@ -19,12 +20,14 @@ public class ClienteResourceIT extends AbstractResourceIT {
     public void testMethods() throws Exception {
 
         final String nome = "JOAO SILVA";
+        final Sexo sexo = Sexo.MASCULINO;
         final String telefone = "9944-5588";
         final String endereco = "RUA GERAL";
 
         //POST
         final ClienteDto clienteDto = ClienteDto.DtoBuilder.create()
                 .nome(nome)
+                .sexo(sexo)
                 .telefone(telefone)
                 .endereco(endereco)
                 .build();

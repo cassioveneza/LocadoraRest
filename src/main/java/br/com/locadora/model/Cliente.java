@@ -3,6 +3,8 @@ package br.com.locadora.model;
 import br.com.locadora.util.AbstractModel;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -19,7 +21,10 @@ public class Cliente implements AbstractModel {
     @Column(name = "NOME")
     private String nome;
 
-    @NotNull
+    @Column(name = "SEXO")
+    @Enumerated(EnumType.STRING)
+    private Sexo sexo;
+
     @Column(name = "TELEFONE")
     private String telefone;
 
@@ -47,6 +52,14 @@ public class Cliente implements AbstractModel {
         this.nome = nome;
     }
 
+    public Sexo getSexo() {
+        return sexo;
+    }
+
+    private void setSexo(Sexo sexo) {
+        this.sexo = sexo;
+    }
+
     public String getTelefone() {
         return telefone;
     }
@@ -64,8 +77,9 @@ public class Cliente implements AbstractModel {
     }
 
     public static class Builder {
+
         private final Cliente cliente;
-        
+
         private Builder() {
             this.cliente = new Cliente();
         }
@@ -77,7 +91,7 @@ public class Cliente implements AbstractModel {
         public static Builder create() {
             return new Builder();
         }
-        
+
         public static Builder from(Cliente cliente) {
             return new Builder(cliente);
         }
@@ -93,6 +107,11 @@ public class Cliente implements AbstractModel {
 
         public Builder nome(String nome) {
             cliente.setNome(nome);
+            return this;
+        }
+
+        public Builder sexo(Sexo sexo) {
+            cliente.setSexo(sexo);
             return this;
         }
 
