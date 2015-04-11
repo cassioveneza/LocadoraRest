@@ -7,15 +7,19 @@ public enum Sexo {
     MASCULINO("Masculino"), 
     FEMININO("Feminino");
 
-    private final String descricao;
+    private final String nome;
 
-    private Sexo(String descricao) {
-        this.descricao = descricao;
+    private Sexo(String nome) {
+        this.nome = nome;
     }
 
     @JsonValue
-    public String getDescricao() {
+    public String getDescription() {
         return toString();
+    }
+    
+    public String getNome() {
+        return this.nome;
     }
 
 }

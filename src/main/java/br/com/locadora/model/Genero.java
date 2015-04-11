@@ -1,5 +1,7 @@
 package br.com.locadora.model;
 
+import com.fasterxml.jackson.annotation.JsonValue;
+
 public enum Genero {
 
     ACAO("Ação"),
@@ -7,9 +9,18 @@ public enum Genero {
     DRAMA("Drama"),
     LANCAMENTO("Lançamento");
 
-    private final String descricao;
+    private final String nome;
 
-    private Genero( String descricao) {
-        this.descricao = descricao;
+    private Genero(String nome) {
+        this.nome = nome;
+    }
+
+    @JsonValue
+    public String getDescription() {
+        return toString();
+    }
+
+    public String getNome() {
+        return this.nome;
     }
 }

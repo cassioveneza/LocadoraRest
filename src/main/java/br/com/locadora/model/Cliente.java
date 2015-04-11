@@ -21,8 +21,9 @@ public class Cliente implements AbstractModel {
     @Column(name = "NOME")
     private String nome;
 
-    @Column(name = "SEXO")
+    @NotNull
     @Enumerated(EnumType.STRING)
+    @Column(name = "SEXO")
     private Sexo sexo;
 
     @Column(name = "TELEFONE")
