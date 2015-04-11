@@ -1,4 +1,4 @@
-package br.com.locadora.resource;
+package br.com.locadora.util;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;

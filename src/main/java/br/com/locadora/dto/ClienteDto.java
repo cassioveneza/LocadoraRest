@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 @XmlRootElement
 public class ClienteDto /*extends AbstractDto<Cliente, ClienteDto>*/ {
@@ -47,7 +46,7 @@ public class ClienteDto /*extends AbstractDto<Cliente, ClienteDto>*/ {
     private void setSexo(Sexo sexo) {
         this.sexo = sexo;
     }
-    
+
     public String getTelefone() {
         return telefone;
     }
@@ -79,7 +78,7 @@ public class ClienteDto /*extends AbstractDto<Cliente, ClienteDto>*/ {
         public static DtoBuilder create() {
             return new DtoBuilder();
         }
-        
+
         public static DtoBuilder from(ClienteDto cliente) {
             return new DtoBuilder(cliente);
         }
@@ -102,7 +101,7 @@ public class ClienteDto /*extends AbstractDto<Cliente, ClienteDto>*/ {
             clienteDto.setSexo(sexo);
             return this;
         }
-        
+
         public DtoBuilder telefone(String telefone) {
             clienteDto.setTelefone(telefone);
             return this;
@@ -135,7 +134,7 @@ public class ClienteDto /*extends AbstractDto<Cliente, ClienteDto>*/ {
                 .endereco(dto.getEndereco())
                 .build();
     }
-    
+
     public List<ClienteDto> toRepresentation(List<Cliente> lista) {
         final List<ClienteDto> listaDto = new ArrayList<>();
         lista.stream().forEach(registro -> {

@@ -31,36 +31,84 @@ public class Filme implements AbstractModel {
     @Column(name = "PRECO")
     private BigDecimal precoUnitario;
 
+    private Filme() {
+    }
+
     @Override
     public long getId() {
         return id;
+    }
+
+    private void setId(long id) {
+        this.id = id;
     }
 
     public String getNome() {
         return nome;
     }
 
-    public Filme setNome(String nome) {
+    private void setNome(String nome) {
         this.nome = nome;
-        return this;
     }
 
     public Genero getGenero() {
         return genero;
     }
 
-    public Filme setGenero(Genero genero) {
+    private void setGenero(Genero genero) {
         this.genero = genero;
-        return this;
     }
 
     public BigDecimal getPrecoUnitario() {
         return precoUnitario;
     }
 
-    public Filme setPrecoUnitario(BigDecimal precoUnitario) {
+    private void setPrecoUnitario(BigDecimal precoUnitario) {
         this.precoUnitario = precoUnitario;
-        return this;
     }
 
+    public static class Builder {
+
+        private final Filme filme;
+
+        private Builder() {
+            this.filme = new Filme();
+        }
+
+        private Builder(Filme filme) {
+            this.filme = filme;
+        }
+
+        public static Builder create() {
+            return new Builder();
+        }
+
+        public static Builder from(Filme filme) {
+            return new Builder(filme);
+        }
+
+        public Filme build() {
+            return filme;
+        }
+
+        public Builder id(long id) {
+            filme.setId(id);
+            return this;
+        }
+
+        public Builder nome(String nome) {
+            filme.setNome(nome);
+            return this;
+        }
+
+        public Builder genero(Genero genero) {
+            filme.setGenero(genero);
+            return this;
+        }
+
+        public Builder precoUnitario(BigDecimal precoUnitario) {
+            filme.setPrecoUnitario(precoUnitario);
+            return this;
+        }
+    }
 }

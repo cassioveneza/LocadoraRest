@@ -1,5 +1,6 @@
 package br.com.locadora.resource;
 
+import br.com.locadora.util.AbstractResourceIT;
 import br.com.locadora.dto.ClienteDto;
 import br.com.locadora.model.Cliente;
 import br.com.locadora.model.Sexo;

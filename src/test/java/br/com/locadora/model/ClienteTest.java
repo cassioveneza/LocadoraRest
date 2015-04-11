@@ -10,15 +10,18 @@ public class ClienteTest {
     public void testCreateUpdate() {
         final String nome = "JOAO SILVA";
         final String telefone = "9944-5588";
+        final Sexo sexo = Sexo.MASCULINO;
         final String endereco = "RUA GERAL";
 
         final Cliente cliente = Cliente.Builder.create()
                 .nome(nome)
+                .sexo(sexo)
                 .telefone(telefone)
                 .endereco(endereco)
                 .build();
         assertNotNull(cliente);
         assertEquals(cliente.getNome(), nome);
+        assertEquals(cliente.getSexo(), sexo);
         assertEquals(cliente.getTelefone(), telefone);
         assertEquals(cliente.getEndereco(), endereco);
 
@@ -28,6 +31,7 @@ public class ClienteTest {
                 .build();
         assertNotNull(clienteAlterado);
         assertEquals(cliente.getNome(), nomeAlterado);
+        assertEquals(cliente.getSexo(), sexo);
         assertEquals(cliente.getTelefone(), telefone);
         assertEquals(cliente.getEndereco(), endereco);
     }

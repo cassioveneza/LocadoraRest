@@ -10,5 +10,12 @@ public class Api {
         public final static String SELF_ID = SELF + "/{id}";
 
     }
+    
+    public static class Filmes {
+
+        public final static String SELF = URL_BASE + "/filmes";
+        public final static String SELF_ID = SELF + "/{id}";
+
+    }
 
 }
