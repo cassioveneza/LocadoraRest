@@ -22,7 +22,7 @@ public class ClienteResource extends AbstractResource {
     @Inject
     private ClienteRepository clienteRepository;
     @Inject
-    private ClienteDto clienteDto;
+    private ClienteDto.DtoBuilder clienteDtoBuilder;
 
     @GET
     @Path("{id}")
@@ -31,27 +31,27 @@ public class ClienteResource extends AbstractResource {
         if (cliente == null) {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
-        return Response.ok(clienteDto.toRepresentation(cliente)).build();
+        return Response.ok(clienteDtoBuilder.toRepresentation(cliente)).build();
     }
 
     @GET
     public Response findAll() {
-        final List<ClienteDto> clientes = clienteDto.toRepresentation(clienteRepository.findAll());
+        final List<ClienteDto> clientes = clienteDtoBuilder.toRepresentation(clienteRepository.findAll());
         return Response.ok(clientes).build();
     }
 
     @POST
     public Response create(ClienteDto dto) {
-        final Cliente cliente = clienteDto.fromRepresentation(dto);
+        final Cliente cliente = clienteDtoBuilder.fromRepresentation(dto);
         em.persist(cliente);
-        return Response.created(null).entity(clienteDto.toRepresentation(cliente)).build();
+        return Response.created(null).entity(clienteDtoBuilder.toRepresentation(cliente)).build();
     }
 
     @PUT
     @Path("{id}")
     public Response update(@PathParam("id") long id, ClienteDto dto) {
-        final Cliente cliente = clienteDto.fromRepresentation(dto);
-        return Response.created(null).entity(clienteDto.toRepresentation(em.merge(cliente))).build();
+        final Cliente cliente = clienteDtoBuilder.fromRepresentation(dto);
+        return Response.created(null).entity(clienteDtoBuilder.toRepresentation(em.merge(cliente))).build();
     }
 
     @DELETE

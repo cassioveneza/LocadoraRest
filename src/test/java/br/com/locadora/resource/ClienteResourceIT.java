@@ -46,7 +46,7 @@ public class ClienteResourceIT extends AbstractResourceIT {
 
         //PUT
         final String nomeAlterado = "JOAO DA SILVA E SILVA";
-        ClienteDto clienteAlterado = ClienteDto.DtoBuilder.from(clienteDto.toRepresentation(clienteResponse))
+        ClienteDto clienteAlterado = ClienteDto.DtoBuilder.from(clienteResponse)
                 .nome(nomeAlterado)
                 .build();
 
