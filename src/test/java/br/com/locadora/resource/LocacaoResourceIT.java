@@ -24,7 +24,6 @@ public class LocacaoResourceIT extends AbstractResourceIT {
         final Sexo sexo = Sexo.MASCULINO;
         final String endereco = "RUA GERAL";
 
-        //POST
         final ClienteDto clienteDto = ClienteDto.DtoBuilder.create()
                 .nome(nome)
                 .sexo(sexo)
@@ -43,6 +42,16 @@ public class LocacaoResourceIT extends AbstractResourceIT {
 
     @Test
     @RunAsClient
+    public void testTestes() throws Exception {
+
+        WebTarget target = client.target(URI.create(Api.Locacoes.SELF));
+        Response response = target.request().get();
+        Assert.assertEquals(response.getStatus(), Response.Status.OK.getStatusCode());
+
+    }
+
+    @Test
+    @RunAsClient
     public void testMethods() throws Exception {
 
 //        final LocalDate data = LocalDate.of(2014, Month.MARCH, 1);
@@ -50,7 +59,7 @@ public class LocacaoResourceIT extends AbstractResourceIT {
 
         //POST
         final LocacaoDto locacaoDto = LocacaoDto.DtoBuilder.create()
-//                .data(data)
+                //                .data(data)
                 .cliente(cliente)
                 .build();
 
@@ -67,7 +76,7 @@ public class LocacaoResourceIT extends AbstractResourceIT {
 
         //PUT
         final Cliente clienteAlterado = criarCliente("MARIA DA SILVA");
-        
+
         LocacaoDto locacaoAlterado = LocacaoDto.DtoBuilder.from(locacaoResponse)
                 .cliente(clienteAlterado)
                 .build();

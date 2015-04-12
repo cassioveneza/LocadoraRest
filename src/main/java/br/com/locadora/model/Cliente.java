@@ -1,13 +1,18 @@
 package br.com.locadora.model;
 
 import br.com.locadora.util.AbstractModel;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
 @Entity(name = "CLIENTES")
@@ -32,6 +37,10 @@ public class Cliente implements AbstractModel {
     @NotNull
     @Column(name = "ENDERECO")
     private String endereco;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "I_CLIENTES")
+    private List<Locacao> locacoes;
 
     private Cliente() {
     }
@@ -75,6 +84,14 @@ public class Cliente implements AbstractModel {
 
     private void setEndereco(String endereco) {
         this.endereco = endereco;
+    }
+    
+    public List<Locacao> getLocacoes() {
+        return locacoes;
+    }
+
+    private void setLocacoes(List<Locacao> locacoes) {
+        this.locacoes = locacoes;
     }
 
     public static class Builder {

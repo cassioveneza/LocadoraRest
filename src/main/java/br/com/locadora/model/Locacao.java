@@ -31,7 +31,7 @@ public class Locacao implements AbstractModel {
     @Column(name = "DATA_LOCACAO")
     private LocalDate data;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "I_CLIENTES")
     private Cliente cliente;
 
