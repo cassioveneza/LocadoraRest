@@ -32,6 +32,9 @@ public class ItemLocacao implements AbstractModel {
     @Column(name = "DATA_DEVOLUCAO")
     private LocalDate dataDevolucao;
 
+    private ItemLocacao() {
+    }
+    
     @Override
     public long getId() {
         return id;

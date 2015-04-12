@@ -18,7 +18,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.Transient;
 
 @Entity(name = "LOCACOES")
 public class Locacao implements AbstractModel {
@@ -39,11 +38,14 @@ public class Locacao implements AbstractModel {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "locacao")
     private List<ItemLocacao> itens = new ArrayList<>();
 
+    private Locacao() {
+    }
+
     @Override
     public long getId() {
         return id;
     }
-    
+
     private void setId(long id) {
         this.id = id;
     }
@@ -119,7 +121,7 @@ public class Locacao implements AbstractModel {
             locacao.adicionaItem(item);
             return this;
         }
-        
+
         public Builder removeItem(ItemLocacao item) {
             locacao.removeItem(item);
             return this;
