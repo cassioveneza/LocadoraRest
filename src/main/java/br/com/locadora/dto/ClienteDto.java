@@ -11,7 +11,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class ClienteDto /*extends AbstractDto<Cliente, ClienteDto>*/ {
 
     @NotNull
-    private long id;
+    private Long id;
     @NotNull
     private String nome;
     @NotNull
@@ -23,11 +23,11 @@ public class ClienteDto /*extends AbstractDto<Cliente, ClienteDto>*/ {
     public ClienteDto() {
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    private void setId(long id) {
+    private void setId(Long id) {
         this.id = id;
     }
 
@@ -75,7 +75,7 @@ public class ClienteDto /*extends AbstractDto<Cliente, ClienteDto>*/ {
             this.clienteDto = clienteDto;
         }
 
-        public DtoBuilder id(long id) {
+        public DtoBuilder id(Long id) {
             clienteDto.setId(id);
             return this;
         }

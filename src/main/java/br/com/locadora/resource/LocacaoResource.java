@@ -28,7 +28,7 @@ public class LocacaoResource extends AbstractResource {
 
     @GET
     @Path("{id}")
-    public Response find(@PathParam("id") long id) {
+    public Response find(@PathParam("id") Long id) {
         final Locacao locacao = locacaoRepository.find(id);
         if (locacao == null) {
             return Response.status(Response.Status.NOT_FOUND).build();
@@ -53,14 +53,14 @@ public class LocacaoResource extends AbstractResource {
     @PUT
     @Path("{id}")
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
-    public Response update(@PathParam("id") long id, LocacaoDto dto) {
+    public Response update(@PathParam("id") Long id, LocacaoDto dto) {
         final Locacao locacao = locacaoDtoBuilder.fromRepresentation(dto);
         return Response.created(null).entity(locacaoDtoBuilder.toRepresentation(em.merge(locacao))).build();
     }
 
     @DELETE
     @Path("{id}")
-    public Response remove(@PathParam("id") long id) {
+    public Response remove(@PathParam("id") Long id) {
         locacaoRepository.removeById(id);
         return Response.noContent().build();
     }

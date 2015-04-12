@@ -19,7 +19,7 @@ public abstract class AbstractRepository<T extends AbstractModel> {
         em.remove(em.merge(entity));
     }
 
-    public void removeById(long id) {
+    public void removeById(Long id) {
         em.remove(em.merge(find(id)));
     }
 

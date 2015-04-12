@@ -16,7 +16,7 @@ public class Filme implements AbstractModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @NotNull
     @Column(name = "NOME")
@@ -35,11 +35,11 @@ public class Filme implements AbstractModel {
     }
 
     @Override
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    private void setId(long id) {
+    private void setId(Long id) {
         this.id = id;
     }
 
@@ -91,7 +91,7 @@ public class Filme implements AbstractModel {
             return filme;
         }
 
-        public Builder id(long id) {
+        public Builder id(Long id) {
             filme.setId(id);
             return this;
         }

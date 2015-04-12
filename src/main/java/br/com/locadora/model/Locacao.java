@@ -24,7 +24,7 @@ public class Locacao implements AbstractModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @JsonDeserialize(using = JsonDateDeserializer.class)
     @JsonSerialize(using = JsonDateSerializer.class)
@@ -42,11 +42,11 @@ public class Locacao implements AbstractModel {
     }
 
     @Override
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    private void setId(long id) {
+    private void setId(Long id) {
         this.id = id;
     }
 
@@ -102,7 +102,7 @@ public class Locacao implements AbstractModel {
             return locacao;
         }
 
-        public Builder id(long id) {
+        public Builder id(Long id) {
             locacao.setId(id);
             return this;
         }

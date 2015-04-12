@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class FilmeDto {
 
     @NotNull
-    private long id;
+    private Long id;
     @NotNull
     private String nome;
     @NotNull
@@ -23,11 +23,11 @@ public class FilmeDto {
     public FilmeDto() {
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    private void setId(long id) {
+    private void setId(Long id) {
         this.id = id;
     }
 
@@ -67,7 +67,7 @@ public class FilmeDto {
             this.filmeDto = filmeDto;
         }
 
-        public DtoBuilder id(long id) {
+        public DtoBuilder id(Long id) {
             filmeDto.setId(id);
             return this;
         }

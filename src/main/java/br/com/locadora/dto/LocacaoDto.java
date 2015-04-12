@@ -19,7 +19,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class LocacaoDto {
 
     @NotNull
-    private long id;
+    private Long id;
 //    @NotNull
     @Transient
     private LocalDate data;
@@ -31,11 +31,11 @@ public class LocacaoDto {
     public LocacaoDto() {
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    private void setId(long id) {
+    private void setId(Long id) {
         this.id = id;
     }
 
@@ -96,7 +96,7 @@ public class LocacaoDto {
             return locacaoDto;
         }
 
-        public DtoBuilder id(long id) {
+        public DtoBuilder id(Long id) {
             locacaoDto.setId(id);
             return this;
         }

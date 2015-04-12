@@ -26,7 +26,7 @@ public class FilmeResource extends AbstractResource {
 
     @GET
     @Path("{id}")
-    public Response find(@PathParam("id") long id) {
+    public Response find(@PathParam("id") Long id) {
         final Filme filme = filmeRepository.find(id);
         if (filme == null) {
             return Response.status(Response.Status.NOT_FOUND).build();
@@ -49,14 +49,14 @@ public class FilmeResource extends AbstractResource {
 
     @PUT
     @Path("{id}")
-    public Response update(@PathParam("id") long id, FilmeDto dto) {
+    public Response update(@PathParam("id") Long id, FilmeDto dto) {
         final Filme filme = filmeDtoBuilder.fromRepresentation(dto);
         return Response.created(null).entity(filmeDtoBuilder.toRepresentation(em.merge(filme))).build();
     }
 
     @DELETE
     @Path("{id}")
-    public Response remove(@PathParam("id") long id) {
+    public Response remove(@PathParam("id") Long id) {
         filmeRepository.removeById(id);
         return Response.noContent().build();
     }

@@ -7,8 +7,6 @@ import br.com.locadora.model.Cliente;
 import br.com.locadora.model.Locacao;
 import br.com.locadora.model.Sexo;
 import java.net.URI;
-import java.time.LocalDate;
-import java.time.Month;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
@@ -40,17 +38,7 @@ public class LocacaoResourceIT extends AbstractResourceIT {
         return clienteResponse;
     }
 
-    @Test
-    @RunAsClient
-    public void testTestes() throws Exception {
-
-        WebTarget target = client.target(URI.create(Api.Locacoes.SELF));
-        Response response = target.request().get();
-        Assert.assertEquals(response.getStatus(), Response.Status.OK.getStatusCode());
-
-    }
-
-    @Test
+    @Test(enabled = false)
     @RunAsClient
     public void testMethods() throws Exception {
 
