@@ -44,37 +44,87 @@ public class Locacao implements AbstractModel {
     public long getId() {
         return id;
     }
+    
+    private void setId(long id) {
+        this.id = id;
+    }
 
     public LocalDate getData() {
         return data;
     }
 
-    public Locacao setData(LocalDate data) {
+    private void setData(LocalDate data) {
         this.data = data;
-        return this;
     }
 
     public Cliente getCliente() {
         return cliente;
     }
 
-    public Locacao setCliente(Cliente cliente) {
+    private void setCliente(Cliente cliente) {
         this.cliente = cliente;
-        return this;
     }
 
     public List<ItemLocacao> getItensLocacao() {
         return itens;
     }
 
-    public Locacao adicionaItemLocacao(ItemLocacao item) {
+    private void adicionaItem(ItemLocacao item) {
         this.itens.add(item);
-        return this;
     }
 
-    public Locacao removeItemLocacao(ItemLocacao item) {
+    private void removeItem(ItemLocacao item) {
         this.itens.remove(item);
-        return this;
     }
 
+    public static class Builder {
+
+        private final Locacao locacao;
+
+        private Builder() {
+            this.locacao = new Locacao();
+        }
+
+        private Builder(Locacao locacao) {
+            this.locacao = locacao;
+        }
+
+        public static Builder create() {
+            return new Builder();
+        }
+
+        public static Builder from(Locacao locacao) {
+            return new Builder(locacao);
+        }
+
+        public Locacao build() {
+            return locacao;
+        }
+
+        public Builder id(long id) {
+            locacao.setId(id);
+            return this;
+        }
+
+        public Builder data(LocalDate data) {
+            locacao.setData(data);
+            return this;
+        }
+
+        public Builder cliente(Cliente cliente) {
+            locacao.setCliente(cliente);
+            return this;
+        }
+
+        public Builder adicionaItem(ItemLocacao item) {
+            locacao.adicionaItem(item);
+            return this;
+        }
+        
+        public Builder removeItem(ItemLocacao item) {
+            locacao.removeItem(item);
+            return this;
+        }
+
+    }
 }

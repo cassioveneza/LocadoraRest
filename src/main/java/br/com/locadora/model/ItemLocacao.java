@@ -1,6 +1,7 @@
 package br.com.locadora.model;
 
 import br.com.locadora.util.AbstractModel;
+import java.time.LocalDate;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -27,27 +28,86 @@ public class ItemLocacao implements AbstractModel {
     @JoinColumn(name = "I_FILMES", nullable = false)
     private Filme filme;
 
+    @NotNull
+    @Column(name = "DATA_DEVOLUCAO")
+    private LocalDate dataDevolucao;
+
     @Override
     public long getId() {
         return id;
     }
 
+    private void setId(long id) {
+        this.id = id;
+    }
+    
     public Locacao getLocacao() {
         return locacao;
     }
 
-    public ItemLocacao setLocacao(Locacao locacao) {
+    private void setLocacao(Locacao locacao) {
         this.locacao = locacao;
-        return this;
     }
 
     public Filme getFilme() {
         return filme;
     }
 
-    public ItemLocacao setFilme(Filme filme) {
+    private void setFilme(Filme filme) {
         this.filme = filme;
-        return this;
     }
 
+    public LocalDate getDataDevolucao() {
+        return dataDevolucao;
+    }
+
+    private void setDataDevolucao(LocalDate dataDevolucao) {
+        this.dataDevolucao = dataDevolucao;
+    }
+
+    public static class Builder {
+
+        private final ItemLocacao itemLocacao;
+
+        private Builder() {
+            this.itemLocacao = new ItemLocacao();
+        }
+
+        private Builder(ItemLocacao itemLocacao) {
+            this.itemLocacao = itemLocacao;
+        }
+
+        public static Builder create() {
+            return new Builder();
+        }
+
+        public static Builder from(ItemLocacao itemLocacao) {
+            return new Builder(itemLocacao);
+        }
+
+        public ItemLocacao build() {
+            return itemLocacao;
+        }
+
+        public Builder id(long id) {
+            itemLocacao.setId(id);
+            return this;
+        }
+        
+        public Builder locacao(Locacao locacao) {
+            itemLocacao.setLocacao(locacao);
+            return this;
+        }
+
+        public Builder filme(Filme filme) {
+            itemLocacao.setFilme(filme);
+            return this;
+        }
+
+        public Builder dataDevolucao(LocalDate dataDevolucao) {
+            itemLocacao.setDataDevolucao(dataDevolucao);
+            return this;
+        }
+
+    }
 }
