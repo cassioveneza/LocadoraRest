@@ -38,6 +38,36 @@ public class LocacaoResourceIT extends AbstractResourceIT {
         return clienteResponse;
     }
 
+    @Test
+    @RunAsClient
+    public void testFake() throws Exception {
+
+        //POST
+        final LocacaoDto locacaoDto = LocacaoDto.DtoBuilder.create()
+                .observacao("TESTE")
+                .build();
+
+        WebTarget target = client.target(URI.create(Api.Locacoes.SELF));
+        Response response = target.request().post(Entity.entity(locacaoDto, MediaType.APPLICATION_JSON), Response.class);
+        Assert.assertEquals(response.getStatus(), Response.Status.CREATED.getStatusCode());
+
+        Locacao locacaoResponse = response.readEntity(Locacao.class);
+        Assert.assertNotNull(locacaoResponse);
+
+        //GET ALL
+        response = target.request().get();
+        Assert.assertEquals(response.getStatus(), Response.Status.OK.getStatusCode());
+
+        //DELETE
+        WebTarget targetResource = client.target(target.getUriBuilder()).path("/" + locacaoResponse.getId());
+        response = targetResource.request().delete();
+        Assert.assertEquals(response.getStatus(), Response.Status.NO_CONTENT.getStatusCode());
+
+        //GET
+        response = targetResource.request().get();
+        Assert.assertEquals(response.getStatus(), Response.Status.NOT_FOUND.getStatusCode());
+    }
+
     @Test(enabled = false)
     @RunAsClient
     public void testMethods() throws Exception {

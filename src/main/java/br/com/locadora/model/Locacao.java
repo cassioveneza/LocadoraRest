@@ -35,6 +35,9 @@ public class Locacao implements AbstractModel {
     @JoinColumn(name = "I_CLIENTES")
     private Cliente cliente;
 
+    @Column(name = "OBSERVACAO")
+    private String observacao;
+
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "locacao")
     private List<ItemLocacao> itens = new ArrayList<>();
 
@@ -64,6 +67,14 @@ public class Locacao implements AbstractModel {
 
     private void setCliente(Cliente cliente) {
         this.cliente = cliente;
+    }
+
+    public String getObservacao() {
+        return observacao;
+    }
+
+    private void setObservacao(String observacao) {
+        this.observacao = observacao;
     }
 
     public List<ItemLocacao> getItensLocacao() {
@@ -114,6 +125,11 @@ public class Locacao implements AbstractModel {
 
         public Builder cliente(Cliente cliente) {
             locacao.setCliente(cliente);
+            return this;
+        }
+
+        public Builder observacao(String observacao) {
+            locacao.setObservacao(observacao);
             return this;
         }
 
