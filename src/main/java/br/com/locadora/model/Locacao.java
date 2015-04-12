@@ -36,7 +36,6 @@ public class Locacao implements AbstractModel {
     @JoinColumn(name = "I_CLIENTES")
     private Cliente cliente;
 
-    @Transient
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "locacao")
     private List<ItemLocacao> itens = new ArrayList<>();
 

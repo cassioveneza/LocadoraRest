@@ -3,10 +3,15 @@ package br.com.locadora.dto;
 import br.com.locadora.model.Cliente;
 import br.com.locadora.model.ItemLocacao;
 import br.com.locadora.model.Locacao;
+import br.com.locadora.util.JsonDateDeserializer;
+import br.com.locadora.util.JsonDateSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -15,11 +20,12 @@ public class LocacaoDto {
 
     @NotNull
     private long id;
-    @NotNull
+//    @NotNull
+    @Transient
     private LocalDate data;
     @NotNull
     private ClienteDto cliente;
-    @NotNull
+//    @NotNull
     private List<ItemLocacaoDto> itens;
 
     public LocacaoDto() {
@@ -64,9 +70,9 @@ public class LocacaoDto {
     public static class DtoBuilder {
 
         @Inject
-        private ClienteDto.DtoBuilder clienteDtoBuilder;
+        private static ClienteDto.DtoBuilder clienteDtoBuilder;
         @Inject
-        private ItemLocacaoDto.DtoBuilder itemDtoBuilder;
+        private static ItemLocacaoDto.DtoBuilder itemDtoBuilder;
 
         private static LocacaoDto locacaoDto;
 
@@ -82,8 +88,8 @@ public class LocacaoDto {
             return new DtoBuilder();
         }
 
-        public static DtoBuilder from(LocacaoDto locacao) {
-            return new DtoBuilder(locacao);
+        public static DtoBuilder from(Locacao locacao) {
+            return new DtoBuilder(toRepresentation(locacao));
         }
 
         public LocacaoDto build() {
@@ -115,7 +121,7 @@ public class LocacaoDto {
             return this;
         }
 
-        public LocacaoDto toRepresentation(Locacao locacao) {
+        public static LocacaoDto toRepresentation(Locacao locacao) {
             final DtoBuilder locacaoDtoBuilder = LocacaoDto.DtoBuilder.create()
                     .id(locacao.getId())
                     .data(locacao.getData())
@@ -131,20 +137,20 @@ public class LocacaoDto {
             return locacaoDtoBuilder.build();
         }
 
-        public Locacao fromRepresentation(LocacaoDto dto) {
+        public static Locacao fromRepresentation(LocacaoDto dto) {
             final Locacao.Builder locacaoBuilder = Locacao.Builder.create()
                     .id(dto.getId())
-                    .data(dto.getData());
-//                .cliente(clienteDtoBuilder.fromRepresentation(dto.getCliente()));
+                    .data(dto.getData())
+                    .cliente(clienteDtoBuilder.fromRepresentation(dto.getCliente()));
 
             //TODO Itens
             return locacaoBuilder.build();
         }
 
-        public List<LocacaoDto> toRepresentation(List<Locacao> lista) {
+        public static List<LocacaoDto> toRepresentation(List<Locacao> lista) {
             final List<LocacaoDto> listaDto = new ArrayList<>();
             lista.stream().forEach(registro -> {
-                listaDto.add(this.toRepresentation(registro));
+                listaDto.add(toRepresentation(registro));
             });
             return listaDto;
         }

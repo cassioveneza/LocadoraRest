@@ -6,6 +6,8 @@ import br.com.locadora.model.ClienteRepository;
 import br.com.locadora.util.AbstractResource;
 import java.util.List;
 import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -41,6 +43,7 @@ public class ClienteResource extends AbstractResource {
     }
 
     @POST
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public Response create(ClienteDto dto) {
         final Cliente cliente = clienteDtoBuilder.fromRepresentation(dto);
         em.persist(cliente);
@@ -48,6 +51,7 @@ public class ClienteResource extends AbstractResource {
     }
 
     @PUT
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
     @Path("{id}")
     public Response update(@PathParam("id") long id, ClienteDto dto) {
         final Cliente cliente = clienteDtoBuilder.fromRepresentation(dto);
