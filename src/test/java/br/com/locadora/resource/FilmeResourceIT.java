@@ -45,7 +45,7 @@ public class FilmeResourceIT extends AbstractResourceIT {
 
         //PUT
         final String nomeAlterado = "DE VOLTA PARA A LAGOA AZUL";
-        FilmeDto filmeAlterado = FilmeDto.DtoBuilder.from(filmeDto.toRepresentation(filmeResponse))
+        FilmeDto filmeAlterado = FilmeDto.DtoBuilder.from(filmeResponse)
                 .nome(nomeAlterado)
                 .build();
 

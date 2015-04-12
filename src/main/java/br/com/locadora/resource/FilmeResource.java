@@ -22,7 +22,7 @@ public class FilmeResource extends AbstractResource {
     @Inject
     private FilmeRepository filmeRepository;
     @Inject
-    private FilmeDto filmeDto;
+    private FilmeDto.DtoBuilder filmeDtoBuilder;
 
     @GET
     @Path("{id}")
@@ -31,27 +31,27 @@ public class FilmeResource extends AbstractResource {
         if (filme == null) {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
-        return Response.ok(filmeDto.toRepresentation(filme)).build();
+        return Response.ok(filmeDtoBuilder.toRepresentation(filme)).build();
     }
 
     @GET
     public Response findAll() {
-        final List<FilmeDto> filmes = filmeDto.toRepresentation(filmeRepository.findAll());
+        final List<FilmeDto> filmes = filmeDtoBuilder.toRepresentation(filmeRepository.findAll());
         return Response.ok(filmes).build();
     }
 
     @POST
     public Response create(FilmeDto dto) {
-        final Filme filme = filmeDto.fromRepresentation(dto);
+        final Filme filme = filmeDtoBuilder.fromRepresentation(dto);
         em.persist(filme);
-        return Response.created(null).entity(filmeDto.toRepresentation(filme)).build();
+        return Response.created(null).entity(filmeDtoBuilder.toRepresentation(filme)).build();
     }
 
     @PUT
     @Path("{id}")
     public Response update(@PathParam("id") long id, FilmeDto dto) {
-        final Filme filme = filmeDto.fromRepresentation(dto);
-        return Response.created(null).entity(filmeDto.toRepresentation(em.merge(filme))).build();
+        final Filme filme = filmeDtoBuilder.fromRepresentation(dto);
+        return Response.created(null).entity(filmeDtoBuilder.toRepresentation(em.merge(filme))).build();
     }
 
     @DELETE

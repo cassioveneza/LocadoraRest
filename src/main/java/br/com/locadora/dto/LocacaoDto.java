@@ -64,9 +64,9 @@ public class LocacaoDto {
     public static class DtoBuilder {
 
         @Inject
-        private ClienteDto clienteDto;
+        private ClienteDto.DtoBuilder clienteDtoBuilder;
         @Inject
-        private ItemLocacaoDto itemDto;
+        private ItemLocacaoDto.DtoBuilder itemDtoBuilder;
 
         private static LocacaoDto locacaoDto;
 
@@ -101,52 +101,52 @@ public class LocacaoDto {
         }
 
         public DtoBuilder cliente(Cliente cliente) {
-            locacaoDto.setCliente(clienteDto.toRepresentation(cliente));
+            locacaoDto.setCliente(clienteDtoBuilder.toRepresentation(cliente));
             return this;
         }
 
         public DtoBuilder adicionaItem(ItemLocacao item) {
-            locacaoDto.adicionaItem(itemDto.toRepresentation(item));
+            locacaoDto.adicionaItem(itemDtoBuilder.toRepresentation(item));
             return this;
         }
 
         public DtoBuilder removeItem(ItemLocacao item) {
-            locacaoDto.removeItem(itemDto.toRepresentation(item));
+            locacaoDto.removeItem(itemDtoBuilder.toRepresentation(item));
             return this;
         }
-    }
 
-    public LocacaoDto toRepresentation(Locacao locacao) {
-        final DtoBuilder locacaoDtoBuilder = LocacaoDto.DtoBuilder.create()
-                .id(locacao.getId())
-                .data(locacao.getData())
-                .cliente(locacao.getCliente());
+        public LocacaoDto toRepresentation(Locacao locacao) {
+            final DtoBuilder locacaoDtoBuilder = LocacaoDto.DtoBuilder.create()
+                    .id(locacao.getId())
+                    .data(locacao.getData())
+                    .cliente(locacao.getCliente());
 
-        //TODO Refatorar
+            //TODO Refatorar
 //            for (ItemLocacaoDto item : locacaoDto.getItens()) {
 //                locacaoDtoBuilder.removeItem(item);
 //            }
 //            for (ItemLocacao item : locacao.getItensLocacao()) {
 //                locacaoDtoBuilder.adicionaItem(item);
 //            }
-        return locacaoDtoBuilder.build();
-    }
+            return locacaoDtoBuilder.build();
+        }
 
-    public Locacao fromRepresentation(LocacaoDto dto) {
-        final Locacao.Builder locacaoBuilder = Locacao.Builder.create()
-                .id(dto.getId())
-                .data(dto.getData());
+        public Locacao fromRepresentation(LocacaoDto dto) {
+            final Locacao.Builder locacaoBuilder = Locacao.Builder.create()
+                    .id(dto.getId())
+                    .data(dto.getData());
 //                .cliente(clienteDtoBuilder.fromRepresentation(dto.getCliente()));
 
-        //TODO Itens
-        return locacaoBuilder.build();
-    }
+            //TODO Itens
+            return locacaoBuilder.build();
+        }
 
-    public List<LocacaoDto> toRepresentation(List<Locacao> lista) {
-        final List<LocacaoDto> listaDto = new ArrayList<>();
-        lista.stream().forEach(registro -> {
-            listaDto.add(this.toRepresentation(registro));
-        });
-        return listaDto;
+        public List<LocacaoDto> toRepresentation(List<Locacao> lista) {
+            final List<LocacaoDto> listaDto = new ArrayList<>();
+            lista.stream().forEach(registro -> {
+                listaDto.add(this.toRepresentation(registro));
+            });
+            return listaDto;
+        }
     }
 }

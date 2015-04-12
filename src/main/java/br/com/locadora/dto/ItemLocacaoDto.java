@@ -47,6 +47,16 @@ public class ItemLocacaoDto {
             this.itemDto = itemDto;
         }
 
+        public DtoBuilder filme(Filme filme) {
+            itemDto.setFilme(filme);
+            return this;
+        }
+
+        public DtoBuilder dataDevolucao(LocalDate dataDevolucao) {
+            itemDto.setDataDevolucao(dataDevolucao);
+            return this;
+        }
+
         public static DtoBuilder create() {
             return new DtoBuilder();
         }
@@ -59,36 +69,26 @@ public class ItemLocacaoDto {
             return itemDto;
         }
 
-        public DtoBuilder filme(Filme filme) {
-            itemDto.setFilme(filme);
-            return this;
+        public ItemLocacaoDto toRepresentation(ItemLocacao item) {
+            return ItemLocacaoDto.DtoBuilder.create()
+                    .filme(item.getFilme())
+                    .dataDevolucao(item.getDataDevolucao())
+                    .build();
         }
 
-        public DtoBuilder dataDevolucao(LocalDate dataDevolucao) {
-            itemDto.setDataDevolucao(dataDevolucao);
-            return this;
+        public ItemLocacao fromRepresentation(ItemLocacaoDto dto) {
+            return ItemLocacao.Builder.create()
+                    .filme(dto.getFilme())
+                    .dataDevolucao(dto.getDataDevolucao())
+                    .build();
         }
-    }
 
-    public ItemLocacaoDto toRepresentation(ItemLocacao item) {
-        return ItemLocacaoDto.DtoBuilder.create()
-                .filme(item.getFilme())
-                .dataDevolucao(item.getDataDevolucao())
-                .build();
-    }
-
-    public ItemLocacao fromRepresentation(ItemLocacaoDto dto) {
-        return ItemLocacao.Builder.create()
-                .filme(dto.getFilme())
-                .dataDevolucao(dto.getDataDevolucao())
-                .build();
-    }
-
-    public List<ItemLocacaoDto> toRepresentation(List<ItemLocacao> lista) {
-        final List<ItemLocacaoDto> listaDto = new ArrayList<>();
-        lista.stream().forEach(registro -> {
-            listaDto.add(this.toRepresentation(registro));
-        });
-        return listaDto;
+        public List<ItemLocacaoDto> toRepresentation(List<ItemLocacao> lista) {
+            final List<ItemLocacaoDto> listaDto = new ArrayList<>();
+            lista.stream().forEach(registro -> {
+                listaDto.add(this.toRepresentation(registro));
+            });
+            return listaDto;
+        }
     }
 }

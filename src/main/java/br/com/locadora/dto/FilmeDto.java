@@ -67,18 +67,6 @@ public class FilmeDto {
             this.filmeDto = filmeDto;
         }
 
-        public static DtoBuilder create() {
-            return new DtoBuilder();
-        }
-
-        public static DtoBuilder from(FilmeDto filme) {
-            return new DtoBuilder(filme);
-        }
-
-        public FilmeDto build() {
-            return filmeDto;
-        }
-
         public DtoBuilder id(long id) {
             filmeDto.setId(id);
             return this;
@@ -98,32 +86,43 @@ public class FilmeDto {
             filmeDto.setPrecoUnitario(precoUnitario);
             return this;
         }
-    }
 
-    public FilmeDto toRepresentation(Filme filme) {
-        return FilmeDto.DtoBuilder.create()
-                .id(filme.getId())
-                .nome(filme.getNome())
-                .genero(filme.getGenero())
-                .precoUnitario(filme.getPrecoUnitario())
-                .build();
-    }
+        public static DtoBuilder create() {
+            return new DtoBuilder();
+        }
 
-    public Filme fromRepresentation(FilmeDto dto) {
-        return Filme.Builder.create()
-                .id(dto.getId())
-                .nome(dto.getNome())
-                .genero(dto.getGenero())
-                .precoUnitario(dto.getPrecoUnitario())
-                .build();
-    }
+        public static DtoBuilder from(Filme filme) {
+            return new DtoBuilder(toRepresentation(filme));
+        }
 
-    public List<FilmeDto> toRepresentation(List<Filme> lista) {
-        final List<FilmeDto> listaDto = new ArrayList<>();
-        lista.stream().forEach(registro -> {
-            listaDto.add(this.toRepresentation(registro));
-        });
-        return listaDto;
-    }
+        public FilmeDto build() {
+            return filmeDto;
+        }
 
+        public static FilmeDto toRepresentation(Filme filme) {
+            return FilmeDto.DtoBuilder.create()
+                    .id(filme.getId())
+                    .nome(filme.getNome())
+                    .genero(filme.getGenero())
+                    .precoUnitario(filme.getPrecoUnitario())
+                    .build();
+        }
+
+        public static Filme fromRepresentation(FilmeDto dto) {
+            return Filme.Builder.create()
+                    .id(dto.getId())
+                    .nome(dto.getNome())
+                    .genero(dto.getGenero())
+                    .precoUnitario(dto.getPrecoUnitario())
+                    .build();
+        }
+
+        public static List<FilmeDto> toRepresentation(List<Filme> lista) {
+            final List<FilmeDto> listaDto = new ArrayList<>();
+            lista.stream().forEach(registro -> {
+                listaDto.add(toRepresentation(registro));
+            });
+            return listaDto;
+        }
+    }
 }
