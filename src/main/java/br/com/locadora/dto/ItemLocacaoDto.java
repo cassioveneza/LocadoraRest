@@ -61,8 +61,8 @@ public class ItemLocacaoDto {
             return new DtoBuilder();
         }
 
-        public static DtoBuilder from(ItemLocacaoDto item) {
-            return new DtoBuilder(item);
+        public static DtoBuilder from(ItemLocacaoDto itemDto) {
+            return new DtoBuilder(itemDto);
         }
 
         public ItemLocacaoDto build() {

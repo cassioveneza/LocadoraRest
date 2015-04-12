@@ -37,7 +37,7 @@ public class ClienteResourceIT extends AbstractResourceIT {
         Response response = target.request().post(Entity.entity(clienteDto, MediaType.APPLICATION_JSON), Response.class);
         Assert.assertEquals(response.getStatus(), Response.Status.CREATED.getStatusCode());
 
-        Cliente clienteResponse = response.readEntity(Cliente.class);
+        ClienteDto clienteResponse = response.readEntity(ClienteDto.class);
         Assert.assertNotNull(clienteResponse);
 
         //GET ALL

@@ -91,15 +91,15 @@ public class FilmeDto {
             return new DtoBuilder();
         }
 
-        public static DtoBuilder from(Filme filme) {
-            return new DtoBuilder(toRepresentation(filme));
+        public static DtoBuilder from(FilmeDto filmeDto) {
+            return new DtoBuilder(filmeDto);
         }
 
         public FilmeDto build() {
             return filmeDto;
         }
 
-        public static FilmeDto toRepresentation(Filme filme) {
+        public FilmeDto toRepresentation(Filme filme) {
             return FilmeDto.DtoBuilder.create()
                     .id(filme.getId())
                     .nome(filme.getNome())
@@ -108,7 +108,7 @@ public class FilmeDto {
                     .build();
         }
 
-        public static Filme fromRepresentation(FilmeDto dto) {
+        public Filme fromRepresentation(FilmeDto dto) {
             return Filme.Builder.create()
                     .id(dto.getId())
                     .nome(dto.getNome())
@@ -117,10 +117,10 @@ public class FilmeDto {
                     .build();
         }
 
-        public static List<FilmeDto> toRepresentation(List<Filme> lista) {
+        public List<FilmeDto> toRepresentation(List<Filme> lista) {
             final List<FilmeDto> listaDto = new ArrayList<>();
             lista.stream().forEach(registro -> {
-                listaDto.add(toRepresentation(registro));
+                listaDto.add(this.toRepresentation(registro));
             });
             return listaDto;
         }

@@ -36,7 +36,7 @@ public class FilmeResourceIT extends AbstractResourceIT {
         Response response = target.request().post(Entity.entity(filmeDto, MediaType.APPLICATION_JSON), Response.class);
         Assert.assertEquals(response.getStatus(), Response.Status.CREATED.getStatusCode());
 
-        Filme filmeResponse = response.readEntity(Filme.class);
+        FilmeDto filmeResponse = response.readEntity(FilmeDto.class);
         Assert.assertNotNull(filmeResponse);
 
         //GET ALL

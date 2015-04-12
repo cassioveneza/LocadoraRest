@@ -18,7 +18,7 @@ import org.testng.annotations.Test;
 @Test
 public class LocacaoResourceIT extends AbstractResourceIT {
 
-    private Cliente criarCliente(String nome) {
+    private ClienteDto criarCliente(String nome) {
         final Sexo sexo = Sexo.MASCULINO;
         final String endereco = "RUA GERAL";
 
@@ -32,13 +32,13 @@ public class LocacaoResourceIT extends AbstractResourceIT {
         Response response = target.request().post(Entity.entity(clienteDto, MediaType.APPLICATION_JSON), Response.class);
         Assert.assertEquals(response.getStatus(), Response.Status.CREATED.getStatusCode());
 
-        Cliente clienteResponse = response.readEntity(Cliente.class);
+        ClienteDto clienteResponse = response.readEntity(ClienteDto.class);
         Assert.assertNotNull(clienteResponse);
 
         return clienteResponse;
     }
 
-    @Test
+    @Test(enabled = false)
     @RunAsClient
     public void testFake() throws Exception {
 
@@ -51,7 +51,7 @@ public class LocacaoResourceIT extends AbstractResourceIT {
         Response response = target.request().post(Entity.entity(locacaoDto, MediaType.APPLICATION_JSON), Response.class);
         Assert.assertEquals(response.getStatus(), Response.Status.CREATED.getStatusCode());
 
-        Locacao locacaoResponse = response.readEntity(Locacao.class);
+        LocacaoDto locacaoResponse = response.readEntity(LocacaoDto.class);
         Assert.assertNotNull(locacaoResponse);
 
         //GET ALL
@@ -73,7 +73,7 @@ public class LocacaoResourceIT extends AbstractResourceIT {
     public void testMethods() throws Exception {
 
 //        final LocalDate data = LocalDate.of(2014, Month.MARCH, 1);
-        final Cliente cliente = criarCliente("JOAO DA SILVA");
+        final ClienteDto cliente = criarCliente("JOAO DA SILVA");
 
         //POST
         final LocacaoDto locacaoDto = LocacaoDto.DtoBuilder.create()
@@ -85,7 +85,7 @@ public class LocacaoResourceIT extends AbstractResourceIT {
         Response response = target.request().post(Entity.entity(locacaoDto, MediaType.APPLICATION_JSON), Response.class);
         Assert.assertEquals(response.getStatus(), Response.Status.CREATED.getStatusCode());
 
-        Locacao locacaoResponse = response.readEntity(Locacao.class);
+        LocacaoDto locacaoResponse = response.readEntity(LocacaoDto.class);
         Assert.assertNotNull(locacaoResponse);
 
         //GET ALL
@@ -93,7 +93,7 @@ public class LocacaoResourceIT extends AbstractResourceIT {
         Assert.assertEquals(response.getStatus(), Response.Status.OK.getStatusCode());
 
         //PUT
-        final Cliente clienteAlterado = criarCliente("MARIA DA SILVA");
+        final ClienteDto clienteAlterado = criarCliente("MARIA DA SILVA");
 
         LocacaoDto locacaoAlterado = LocacaoDto.DtoBuilder.from(locacaoResponse)
                 .cliente(clienteAlterado)

@@ -104,15 +104,15 @@ public class ClienteDto /*extends AbstractDto<Cliente, ClienteDto>*/ {
             return new DtoBuilder();
         }
 
-        public static DtoBuilder from(Cliente cliente) {
-            return new DtoBuilder(toRepresentation(cliente));
+        public static DtoBuilder from(ClienteDto clienteDto) {
+            return new DtoBuilder(clienteDto);
         }
 
         public ClienteDto build() {
             return clienteDto;
         }
 
-        public static ClienteDto toRepresentation(Cliente cliente) {
+        public ClienteDto toRepresentation(Cliente cliente) {
             return ClienteDto.DtoBuilder.create()
                     .id(cliente.getId())
                     .nome(cliente.getNome())
@@ -122,7 +122,7 @@ public class ClienteDto /*extends AbstractDto<Cliente, ClienteDto>*/ {
                     .build();
         }
 
-        public static Cliente fromRepresentation(ClienteDto dto) {
+        public Cliente fromRepresentation(ClienteDto dto) {
             return Cliente.Builder.create()
                     .id(dto.getId())
                     .nome(dto.getNome())
@@ -132,7 +132,7 @@ public class ClienteDto /*extends AbstractDto<Cliente, ClienteDto>*/ {
                     .build();
         }
 
-        public static List<ClienteDto> toRepresentation(List<Cliente> lista) {
+        public List<ClienteDto> toRepresentation(List<Cliente> lista) {
             final List<ClienteDto> listaDto = new ArrayList<>();
             lista.stream().forEach(registro -> {
                 listaDto.add(toRepresentation(registro));
