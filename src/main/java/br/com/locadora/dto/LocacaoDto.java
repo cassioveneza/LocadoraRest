@@ -1,6 +1,10 @@
 package br.com.locadora.dto;
 
 import br.com.locadora.model.Locacao;
+import br.com.locadora.util.JsonDateDeserializer;
+import br.com.locadora.util.JsonDateSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,14 +14,16 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class LocacaoDto {
 
-    @NotNull
     private Long id;
-    @NotNull
+    
+    @JsonDeserialize(using = JsonDateDeserializer.class)
+    @JsonSerialize(using = JsonDateSerializer.class)
     private LocalDate data;
-    @NotNull
+    
     private ClienteDto cliente;
+    
     private String observacao;
-    @NotNull
+    
     private List<ItemLocacaoDto> itens;
 
     public LocacaoDto() {
@@ -46,7 +52,7 @@ public class LocacaoDto {
     private void setCliente(ClienteDto cliente) {
         this.cliente = cliente;
     }
-    
+
     public String getObservacao() {
         return observacao;
     }
@@ -66,7 +72,7 @@ public class LocacaoDto {
     private void removeItem(ItemLocacaoDto item) {
         this.itens.remove(item);
     }
-    
+
     public static class DtoBuilder {
 
         private static LocacaoDto locacaoDto;
@@ -78,7 +84,7 @@ public class LocacaoDto {
         private DtoBuilder(LocacaoDto locacaoDto) {
             this.locacaoDto = locacaoDto;
         }
-        
+
         public DtoBuilder id(Long id) {
             locacaoDto.setId(id);
             return this;
@@ -88,7 +94,7 @@ public class LocacaoDto {
             locacaoDto.setObservacao(observacao);
             return this;
         }
-        
+
         public DtoBuilder data(LocalDate data) {
             locacaoDto.setData(data);
             return this;
@@ -120,11 +126,11 @@ public class LocacaoDto {
         public LocacaoDto build() {
             return locacaoDto;
         }
-        
+
         public LocacaoDto toRepresentation(Locacao locacao) {
             final DtoBuilder locacaoDtoBuilder = LocacaoDto.DtoBuilder.create()
                     .id(locacao.getId())
-                    //                    .data(locacao.getData())
+                    .data(locacao.getData())
                     //                    .cliente(locacao.getCliente())
                     .observacao(locacao.getObservacao());
 
@@ -141,7 +147,7 @@ public class LocacaoDto {
         public Locacao fromRepresentation(LocacaoDto dto) {
             final Locacao.Builder locacaoBuilder = Locacao.Builder.create()
                     .id(dto.getId())
-                    //                    .data(dto.getData())
+                    .data(dto.getData())
                     //                    .cliente(dto.getCliente())
                     .observacao(dto.getObservacao());
 

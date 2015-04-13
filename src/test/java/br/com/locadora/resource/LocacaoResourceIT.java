@@ -43,9 +43,11 @@ public class LocacaoResourceIT extends AbstractResourceIT {
     @RunAsClient
     public void testFake() throws Exception {
         ClienteDto cliente = criarCliente("JOAO");
+        
         //POST
         final LocacaoDto locacaoDto = LocacaoDto.DtoBuilder.create()
                 .observacao("TESTE")
+                .data(LocalDate.MIN)
                 .build();
 
         WebTarget target = client.target(URI.create(Api.Locacoes.SELF));
@@ -83,7 +85,7 @@ public class LocacaoResourceIT extends AbstractResourceIT {
 
         //POST
         final LocacaoDto locacaoDto = LocacaoDto.DtoBuilder.create()
-                //                .data(data)
+                .data(data)
                 //                .cliente(cliente)
                 .observacao(observacao)
                 .build();
@@ -94,17 +96,19 @@ public class LocacaoResourceIT extends AbstractResourceIT {
 
         LocacaoDto locacaoResponse = response.readEntity(LocacaoDto.class);
         Assert.assertNotNull(locacaoResponse);
+        Assert.assertNotNull(locacaoResponse.getId());
+        Assert.assertEquals(locacaoResponse.getObservacao(), observacao);
+        //TODO Gravar data
+//        Assert.assertEquals(locacaoResponse.getData(), data);
 
         //GET ALL
         response = target.request().get();
         Assert.assertEquals(response.getStatus(), Response.Status.OK.getStatusCode());
 
         //PUT
-//        final ClienteDto clienteAlterado = criarCliente("MARIA DA SILVA");
         final String observacaoAlterada = "OBSERVACAO ALTERADA";
 
         LocacaoDto locacaoAlterado = LocacaoDto.DtoBuilder.from(locacaoResponse)
-                //                .cliente(clienteAlterado)
                 .observacao(observacaoAlterada)
                 .build();
 
@@ -116,8 +120,8 @@ public class LocacaoResourceIT extends AbstractResourceIT {
 
         Locacao locacaoResponseUpdated = response.readEntity(Locacao.class);
         Assert.assertNotNull(locacaoResponseUpdated);
-//        Assert.assertEquals(locacaoResponseUpdated.getCliente(), clienteAlterado);
         Assert.assertEquals(locacaoResponseUpdated.getObservacao(), observacaoAlterada);
+//        Assert.assertEquals(locacaoResponseUpdated.getData(), data);
 
         //DELETE
         response = targetResource.request().delete();
