@@ -6,8 +6,6 @@ import br.com.locadora.model.LocacaoRepository;
 import br.com.locadora.util.AbstractResource;
 import java.util.List;
 import javax.ejb.Stateless;
-import javax.ejb.TransactionAttribute;
-import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -43,7 +41,6 @@ public class LocacaoResource extends AbstractResource {
     }
 
     @POST
-    @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public Response create(LocacaoDto dto) {
         final Locacao locacao = locacaoDtoBuilder.fromRepresentation(dto);
         em.persist(locacao);
@@ -52,7 +49,6 @@ public class LocacaoResource extends AbstractResource {
 
     @PUT
     @Path("{id}")
-    @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public Response update(@PathParam("id") Long id, LocacaoDto dto) {
         final Locacao locacao = locacaoDtoBuilder.fromRepresentation(dto);
         return Response.created(null).entity(locacaoDtoBuilder.toRepresentation(em.merge(locacao))).build();

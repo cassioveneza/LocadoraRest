@@ -38,16 +38,20 @@ public class LocacaoResourceIT extends AbstractResourceIT {
         return clienteResponse;
     }
 
-    @Test(enabled = false)
+    @Test
     @RunAsClient
     public void testFake() throws Exception {
-
+        ClienteDto cliente = criarCliente("JOAO");
         //POST
         final LocacaoDto locacaoDto = LocacaoDto.DtoBuilder.create()
                 .observacao("TESTE")
                 .build();
 
         WebTarget target = client.target(URI.create(Api.Locacoes.SELF));
+        
+        LocacaoDto locacaoResponse1 = target.request().post(Entity.entity(locacaoDto, MediaType.APPLICATION_JSON), LocacaoDto.class);
+        Assert.assertNotNull(locacaoResponse1);
+        
         Response response = target.request().post(Entity.entity(locacaoDto, MediaType.APPLICATION_JSON), Response.class);
         Assert.assertEquals(response.getStatus(), Response.Status.CREATED.getStatusCode());
 
@@ -78,7 +82,7 @@ public class LocacaoResourceIT extends AbstractResourceIT {
         //POST
         final LocacaoDto locacaoDto = LocacaoDto.DtoBuilder.create()
                 //                .data(data)
-                .cliente(cliente)
+//                .cliente(cliente)
                 .build();
 
         WebTarget target = client.target(URI.create(Api.Locacoes.SELF));
@@ -96,7 +100,7 @@ public class LocacaoResourceIT extends AbstractResourceIT {
         final ClienteDto clienteAlterado = criarCliente("MARIA DA SILVA");
 
         LocacaoDto locacaoAlterado = LocacaoDto.DtoBuilder.from(locacaoResponse)
-                .cliente(clienteAlterado)
+//                .cliente(clienteAlterado)
                 .build();
 
         //TODO: Ajustar para buscar pelo parametro {id}
