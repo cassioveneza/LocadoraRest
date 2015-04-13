@@ -1,6 +1,7 @@
 package br.com.locadora.dto;
 
 import br.com.locadora.model.Locacao;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import javax.validation.constraints.NotNull;
@@ -11,13 +12,13 @@ public class LocacaoDto {
 
     @NotNull
     private Long id;
-//    @NotNull
-//    private LocalDate data;
-//    @NotNull
-//    private ClienteDto cliente;
+    @NotNull
+    private LocalDate data;
+    @NotNull
+    private ClienteDto cliente;
     private String observacao;
-//    @NotNull
-//    private List<ItemLocacaoDto> itens;
+    @NotNull
+    private List<ItemLocacaoDto> itens;
 
     public LocacaoDto() {
     }
@@ -30,21 +31,22 @@ public class LocacaoDto {
         this.id = id;
     }
 
-//    public LocalDate getData() {
-//        return data;
-//    }
-//
-//    private void setData(LocalDate data) {
-//        this.data = data;
-//    }
-//
-//    public ClienteDto getCliente() {
-//        return cliente;
-//    }
-//
-//    private void setCliente(ClienteDto cliente) {
-//        this.cliente = cliente;
-//    }
+    public LocalDate getData() {
+        return data;
+    }
+
+    private void setData(LocalDate data) {
+        this.data = data;
+    }
+
+    public ClienteDto getCliente() {
+        return cliente;
+    }
+
+    private void setCliente(ClienteDto cliente) {
+        this.cliente = cliente;
+    }
+    
     public String getObservacao() {
         return observacao;
     }
@@ -53,17 +55,18 @@ public class LocacaoDto {
         this.observacao = observacao;
     }
 
-//    public List<ItemLocacaoDto> getItens() {
-//        return itens;
-//    }
-//
-//    private void adicionaItem(ItemLocacaoDto item) {
-//        this.itens.add(item);
-//    }
-//
-//    private void removeItem(ItemLocacaoDto item) {
-//        this.itens.remove(item);
-//    }
+    public List<ItemLocacaoDto> getItens() {
+        return itens;
+    }
+
+    private void adicionaItem(ItemLocacaoDto item) {
+        this.itens.add(item);
+    }
+
+    private void removeItem(ItemLocacaoDto item) {
+        this.itens.remove(item);
+    }
+    
     public static class DtoBuilder {
 
         private static LocacaoDto locacaoDto;
@@ -86,25 +89,25 @@ public class LocacaoDto {
             return this;
         }
         
-//        public DtoBuilder data(LocalDate data) {
-//            locacaoDto.setData(data);
-//            return this;
-//        }
-//
-//        public DtoBuilder cliente(ClienteDto clienteDto) {
-//            locacaoDto.setCliente(clienteDto);
-//            return this;
-//        }
-//
-//        public DtoBuilder adicionaItem(ItemLocacaoDto itemDto) {
-//            locacaoDto.adicionaItem(itemDto);
-//            return this;
-//        }
-//
-//        public DtoBuilder removeItem(ItemLocacaoDto itemDto) {
-//            locacaoDto.removeItem(itemDto);
-//            return this;
-//        }
+        public DtoBuilder data(LocalDate data) {
+            locacaoDto.setData(data);
+            return this;
+        }
+
+        public DtoBuilder cliente(ClienteDto clienteDto) {
+            locacaoDto.setCliente(clienteDto);
+            return this;
+        }
+
+        public DtoBuilder adicionaItem(ItemLocacaoDto itemDto) {
+            locacaoDto.adicionaItem(itemDto);
+            return this;
+        }
+
+        public DtoBuilder removeItem(ItemLocacaoDto itemDto) {
+            locacaoDto.removeItem(itemDto);
+            return this;
+        }
 
         public static DtoBuilder create() {
             return new DtoBuilder();
