@@ -5,19 +5,17 @@ import br.com.locadora.model.Genero;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class FilmeDto {
 
-    @NotNull
     private Long id;
-    @NotNull
+
     private String nome;
-    @NotNull
+
     private Genero genero;
-    @NotNull
+
     private BigDecimal precoUnitario;
 
     public FilmeDto() {
@@ -57,7 +55,7 @@ public class FilmeDto {
 
     public static class DtoBuilder {
 
-        private static FilmeDto filmeDto;
+        private FilmeDto filmeDto;
 
         private DtoBuilder() {
             this.filmeDto = new FilmeDto();

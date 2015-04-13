@@ -5,15 +5,13 @@ import br.com.locadora.model.ItemLocacao;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class ItemLocacaoDto {
 
-    @NotNull
     private Filme filme;
-    @NotNull
+
     private LocalDate dataDevolucao;
 
     public ItemLocacaoDto() {
@@ -37,7 +35,7 @@ public class ItemLocacaoDto {
 
     public static class DtoBuilder {
 
-        private static ItemLocacaoDto itemDto;
+        private ItemLocacaoDto itemDto;
 
         private DtoBuilder() {
             this.itemDto = new ItemLocacaoDto();

@@ -4,20 +4,19 @@ import br.com.locadora.model.Cliente;
 import br.com.locadora.model.Sexo;
 import java.util.ArrayList;
 import java.util.List;
-import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
-public class ClienteDto /*extends AbstractDto<Cliente, ClienteDto>*/ {
+public class ClienteDto {
 
-    @NotNull
     private Long id;
-    @NotNull
+
     private String nome;
-    @NotNull
+
     private Sexo sexo;
+
     private String telefone;
-    @NotNull
+
     private String endereco;
 
     public ClienteDto() {
@@ -65,7 +64,7 @@ public class ClienteDto /*extends AbstractDto<Cliente, ClienteDto>*/ {
 
     public static class DtoBuilder {
 
-        private static ClienteDto clienteDto;
+        private ClienteDto clienteDto;
 
         private DtoBuilder() {
             this.clienteDto = new ClienteDto();

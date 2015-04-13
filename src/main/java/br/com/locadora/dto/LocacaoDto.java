@@ -8,22 +8,21 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class LocacaoDto {
 
     private Long id;
-    
+
     @JsonDeserialize(using = JsonDateDeserializer.class)
     @JsonSerialize(using = JsonDateSerializer.class)
     private LocalDate data;
-    
+
     private ClienteDto cliente;
-    
+
     private String observacao;
-    
+
     private List<ItemLocacaoDto> itens;
 
     public LocacaoDto() {
@@ -75,7 +74,7 @@ public class LocacaoDto {
 
     public static class DtoBuilder {
 
-        private static LocacaoDto locacaoDto;
+        private LocacaoDto locacaoDto;
 
         private DtoBuilder() {
             this.locacaoDto = new LocacaoDto();
