@@ -3,6 +3,7 @@ package br.com.locadora.resource;
 import br.com.locadora.dto.ClienteDto;
 import br.com.locadora.util.AbstractResourceIT;
 import br.com.locadora.dto.LocacaoDto;
+import br.com.locadora.model.Cliente;
 import br.com.locadora.model.Locacao;
 import br.com.locadora.model.Sexo;
 import java.net.URI;
@@ -19,7 +20,7 @@ import org.testng.annotations.Test;
 @Test
 public class LocacaoResourceIT extends AbstractResourceIT {
 
-    private ClienteDto criarCliente(String nome) {
+    private Cliente criarCliente(String nome) {
         final Sexo sexo = Sexo.MASCULINO;
         final String endereco = "RUA GERAL";
 
@@ -33,7 +34,7 @@ public class LocacaoResourceIT extends AbstractResourceIT {
         Response response = target.request().post(Entity.entity(clienteDto, MediaType.APPLICATION_JSON), Response.class);
         Assert.assertEquals(response.getStatus(), Response.Status.CREATED.getStatusCode());
 
-        ClienteDto clienteResponse = response.readEntity(ClienteDto.class);
+        Cliente clienteResponse = response.readEntity(Cliente.class);
         Assert.assertNotNull(clienteResponse);
 
         return clienteResponse;
@@ -41,52 +42,16 @@ public class LocacaoResourceIT extends AbstractResourceIT {
 
     @Test
     @RunAsClient
-    public void testFake() throws Exception {
-        ClienteDto cliente = criarCliente("JOAO");
-        
-        //POST
-        final LocacaoDto locacaoDto = LocacaoDto.DtoBuilder.create()
-                .observacao("TESTE")
-                .data(LocalDate.MIN)
-                .build();
-
-        WebTarget target = client.target(URI.create(Api.Locacoes.SELF));
-
-        LocacaoDto locacaoResponse1 = target.request().post(Entity.entity(locacaoDto, MediaType.APPLICATION_JSON), LocacaoDto.class);
-        Assert.assertNotNull(locacaoResponse1);
-
-        Response response = target.request().post(Entity.entity(locacaoDto, MediaType.APPLICATION_JSON), Response.class);
-        Assert.assertEquals(response.getStatus(), Response.Status.CREATED.getStatusCode());
-
-        LocacaoDto locacaoResponse = response.readEntity(LocacaoDto.class);
-        Assert.assertNotNull(locacaoResponse);
-
-        //GET ALL
-        response = target.request().get();
-        Assert.assertEquals(response.getStatus(), Response.Status.OK.getStatusCode());
-
-        //DELETE
-        WebTarget targetResource = client.target(target.getUriBuilder()).path("/" + locacaoResponse.getId());
-        response = targetResource.request().delete();
-        Assert.assertEquals(response.getStatus(), Response.Status.NO_CONTENT.getStatusCode());
-
-        //GET
-        response = targetResource.request().get();
-        Assert.assertEquals(response.getStatus(), Response.Status.NOT_FOUND.getStatusCode());
-    }
-
-    @Test
-    @RunAsClient
     public void testMethods() throws Exception {
 
         final LocalDate data = LocalDate.of(2014, Month.MARCH, 1);
-        final ClienteDto cliente = criarCliente("JOAO DA SILVA");
+        final Cliente cliente = criarCliente("JOAO DA SILVA");
         final String observacao = "LOCACAO PARA TESTES";
 
         //POST
         final LocacaoDto locacaoDto = LocacaoDto.DtoBuilder.create()
                 .data(data)
-                //                .cliente(cliente)
+                .cliente(cliente)
                 .observacao(observacao)
                 .build();
 
@@ -97,9 +62,9 @@ public class LocacaoResourceIT extends AbstractResourceIT {
         LocacaoDto locacaoResponse = response.readEntity(LocacaoDto.class);
         Assert.assertNotNull(locacaoResponse);
         Assert.assertNotNull(locacaoResponse.getId());
+        Assert.assertEquals(locacaoResponse.getCliente().getId(), cliente.getId());
+        Assert.assertEquals(locacaoResponse.getData(), data);
         Assert.assertEquals(locacaoResponse.getObservacao(), observacao);
-        //TODO Gravar data
-//        Assert.assertEquals(locacaoResponse.getData(), data);
 
         //GET ALL
         response = target.request().get();
@@ -120,8 +85,9 @@ public class LocacaoResourceIT extends AbstractResourceIT {
 
         Locacao locacaoResponseUpdated = response.readEntity(Locacao.class);
         Assert.assertNotNull(locacaoResponseUpdated);
+        Assert.assertEquals(locacaoResponseUpdated.getCliente().getId(), cliente.getId());
+        Assert.assertEquals(locacaoResponseUpdated.getData(), data);
         Assert.assertEquals(locacaoResponseUpdated.getObservacao(), observacaoAlterada);
-//        Assert.assertEquals(locacaoResponseUpdated.getData(), data);
 
         //DELETE
         response = targetResource.request().delete();

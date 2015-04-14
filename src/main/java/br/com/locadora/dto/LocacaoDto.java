@@ -1,5 +1,6 @@
 package br.com.locadora.dto;
 
+import br.com.locadora.model.Cliente;
 import br.com.locadora.model.Locacao;
 import br.com.locadora.util.JsonDateDeserializer;
 import br.com.locadora.util.JsonDateSerializer;
@@ -19,7 +20,7 @@ public class LocacaoDto {
     @JsonSerialize(using = JsonDateSerializer.class)
     private LocalDate data;
 
-    private ClienteDto cliente;
+    private Cliente cliente;
 
     private String observacao;
 
@@ -44,11 +45,11 @@ public class LocacaoDto {
         this.data = data;
     }
 
-    public ClienteDto getCliente() {
+    public Cliente getCliente() {
         return cliente;
     }
 
-    private void setCliente(ClienteDto cliente) {
+    private void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
 
@@ -99,8 +100,8 @@ public class LocacaoDto {
             return this;
         }
 
-        public DtoBuilder cliente(ClienteDto clienteDto) {
-            locacaoDto.setCliente(clienteDto);
+        public DtoBuilder cliente(Cliente cliente) {
+            locacaoDto.setCliente(cliente);
             return this;
         }
 
@@ -130,7 +131,7 @@ public class LocacaoDto {
             final DtoBuilder locacaoDtoBuilder = LocacaoDto.DtoBuilder.create()
                     .id(locacao.getId())
                     .data(locacao.getData())
-                    //                    .cliente(locacao.getCliente())
+                    .cliente(locacao.getCliente())
                     .observacao(locacao.getObservacao());
 
             //TODO Refatorar
@@ -147,7 +148,7 @@ public class LocacaoDto {
             final Locacao.Builder locacaoBuilder = Locacao.Builder.create()
                     .id(dto.getId())
                     .data(dto.getData())
-                    //                    .cliente(dto.getCliente())
+                    .cliente(dto.getCliente())
                     .observacao(dto.getObservacao());
 
             //TODO Itens
