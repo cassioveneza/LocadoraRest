@@ -1,5 +1,6 @@
 package br.com.locadora.model;
 
+import br.com.locadora.dto.FilmeDto;
 import java.math.BigDecimal;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
@@ -13,7 +14,7 @@ public class FilmeTest {
         final Genero genero = Genero.DRAMA;
         final BigDecimal precoUnitario = BigDecimal.ONE;
 
-        final Filme filme = Filme.Builder.create()
+        final FilmeDto filme = FilmeDto.DtoBuilder.create()
                 .nome(nome)
                 .genero(genero)
                 .precoUnitario(precoUnitario)
@@ -24,7 +25,7 @@ public class FilmeTest {
         assertEquals(filme.getPrecoUnitario(), precoUnitario);
 
         final String nomeAlterado = "DE VOLTA PARA A LAGOA AZUL";
-        Filme filmeAlterado = Filme.Builder.from(filme)
+        FilmeDto filmeAlterado = FilmeDto.DtoBuilder.from(filme)
                 .nome(nomeAlterado)
                 .build();
         assertNotNull(filmeAlterado);

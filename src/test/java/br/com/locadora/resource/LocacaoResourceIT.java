@@ -40,7 +40,7 @@ public class LocacaoResourceIT extends AbstractResourceIT {
         return clienteResponse;
     }
 
-    @Test
+    @Test(enabled = false)
     @RunAsClient
     public void testMethods() throws Exception {
 

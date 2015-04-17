@@ -84,10 +84,6 @@ public class ItemLocacao implements AbstractModel {
             return new Builder();
         }
 
-        public static Builder from(ItemLocacao itemLocacao) {
-            return new Builder(itemLocacao);
-        }
-
         public ItemLocacao build() {
             return itemLocacao;
         }

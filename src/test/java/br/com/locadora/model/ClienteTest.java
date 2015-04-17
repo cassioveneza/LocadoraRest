@@ -1,5 +1,6 @@
 package br.com.locadora.model;
 
+import br.com.locadora.dto.ClienteDto;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 import org.testng.annotations.Test;
@@ -13,7 +14,7 @@ public class ClienteTest {
         final Sexo sexo = Sexo.MASCULINO;
         final String endereco = "RUA GERAL";
 
-        final Cliente cliente = Cliente.Builder.create()
+        final ClienteDto cliente = ClienteDto.DtoBuilder.create()
                 .nome(nome)
                 .sexo(sexo)
                 .telefone(telefone)
@@ -26,7 +27,7 @@ public class ClienteTest {
         assertEquals(cliente.getEndereco(), endereco);
 
         final String nomeAlterado = "MARIA DA SILVA";
-        Cliente clienteAlterado = Cliente.Builder.from(cliente)
+        ClienteDto clienteAlterado = ClienteDto.DtoBuilder.from(cliente)
                 .nome(nomeAlterado)
                 .build();
         assertNotNull(clienteAlterado);

@@ -110,10 +110,6 @@ public class Cliente implements AbstractModel {
             return new Builder();
         }
 
-        public static Builder from(Cliente cliente) {
-            return new Builder(cliente);
-        }
-
         public Cliente build() {
             return cliente;
         }

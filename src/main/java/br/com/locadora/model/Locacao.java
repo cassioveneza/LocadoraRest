@@ -105,10 +105,6 @@ public class Locacao implements AbstractModel {
             return new Builder();
         }
 
-        public static Builder from(Locacao locacao) {
-            return new Builder(locacao);
-        }
-
         public Locacao build() {
             return locacao;
         }

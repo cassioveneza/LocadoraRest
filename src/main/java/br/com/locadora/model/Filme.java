@@ -83,10 +83,6 @@ public class Filme implements AbstractModel {
             return new Builder();
         }
 
-        public static Builder from(Filme filme) {
-            return new Builder(filme);
-        }
-
         public Filme build() {
             return filme;
         }
