@@ -76,10 +76,6 @@ public class ItemLocacao implements AbstractModel {
             this.itemLocacao = new ItemLocacao();
         }
 
-        private Builder(ItemLocacao itemLocacao) {
-            this.itemLocacao = itemLocacao;
-        }
-
         public static Builder create() {
             return new Builder();
         }

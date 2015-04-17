@@ -75,10 +75,6 @@ public class Filme implements AbstractModel {
             this.filme = new Filme();
         }
 
-        private Builder(Filme filme) {
-            this.filme = filme;
-        }
-
         public static Builder create() {
             return new Builder();
         }

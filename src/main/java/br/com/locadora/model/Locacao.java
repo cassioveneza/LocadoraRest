@@ -97,10 +97,6 @@ public class Locacao implements AbstractModel {
             this.locacao = new Locacao();
         }
 
-        private Builder(Locacao locacao) {
-            this.locacao = locacao;
-        }
-
         public static Builder create() {
             return new Builder();
         }

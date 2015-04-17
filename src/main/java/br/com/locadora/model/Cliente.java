@@ -102,10 +102,6 @@ public class Cliente implements AbstractModel {
             this.cliente = new Cliente();
         }
 
-        private Builder(Cliente cliente) {
-            this.cliente = cliente;
-        }
-
         public static Builder create() {
             return new Builder();
         }
