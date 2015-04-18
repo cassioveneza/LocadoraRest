@@ -37,36 +37,36 @@ public class ClienteResourceIT extends AbstractResourceIT {
         Response response = target.request().post(Entity.entity(clienteDto, MediaType.APPLICATION_JSON), Response.class);
         Assert.assertEquals(response.getStatus(), Response.Status.CREATED.getStatusCode());
 
-        ClienteDto clienteResponse = response.readEntity(ClienteDto.class);
-        Assert.assertNotNull(clienteResponse);
+        Cliente clienteCreated = response.readEntity(Cliente.class);
+        Assert.assertNotNull(clienteCreated);
 
         //GET ALL
         response = target.request().get();
         Assert.assertEquals(response.getStatus(), Response.Status.OK.getStatusCode());
 
-//        //PUT
-//        final String nomeAlterado = "JOAO DA SILVA E SILVA";
-//        ClienteDto clienteAlterado = ClienteDto.ClienteDtoBuilder.from(clienteResponse)
-//                .nome(nomeAlterado)
-//                .build();
-//
-//        //TODO: Ajustar para buscar pelo parametro {id}
-//        WebTarget targetResource = client.target(target.getUriBuilder()).path("/" + clienteResponse.getId());
-//
-//        response = targetResource.request().put(Entity.entity(clienteAlterado, MediaType.APPLICATION_JSON));
-//        Assert.assertEquals(response.getStatus(), Response.Status.CREATED.getStatusCode());
-//
-//        Cliente clienteResponseUpdated = response.readEntity(Cliente.class);
-//        Assert.assertNotNull(clienteResponseUpdated);
-//        Assert.assertEquals(clienteResponseUpdated.getNome(), nomeAlterado);
-//
-//        //DELETE
-//        response = targetResource.request().delete();
-//        Assert.assertEquals(response.getStatus(), Response.Status.NO_CONTENT.getStatusCode());
-//
-//        //GET
-//        response = targetResource.request().get();
-//        Assert.assertEquals(response.getStatus(), Response.Status.NOT_FOUND.getStatusCode());
+        //PUT
+        final String nomeAlterado = "JOAO DA SILVA E SILVA";
+        Cliente clienteAlterado = Cliente.Builder.from(clienteCreated)
+                .nome(nomeAlterado)
+                .build();
+
+        //TODO: Ajustar para buscar pelo parametro {id}
+        WebTarget targetResource = client.target(target.getUriBuilder()).path("/" + clienteCreated.getId());
+
+        response = targetResource.request().put(Entity.entity(clienteAlterado, MediaType.APPLICATION_JSON));
+        Assert.assertEquals(response.getStatus(), Response.Status.CREATED.getStatusCode());
+
+        Cliente clienteResponseUpdated = response.readEntity(Cliente.class);
+        Assert.assertNotNull(clienteResponseUpdated);
+        Assert.assertEquals(clienteResponseUpdated.getNome(), nomeAlterado);
+
+        //DELETE
+        response = targetResource.request().delete();
+        Assert.assertEquals(response.getStatus(), Response.Status.NO_CONTENT.getStatusCode());
+
+        //GET
+        response = targetResource.request().get();
+        Assert.assertEquals(response.getStatus(), Response.Status.NOT_FOUND.getStatusCode());
     }
 
 }

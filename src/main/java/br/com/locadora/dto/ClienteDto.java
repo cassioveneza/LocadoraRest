@@ -59,6 +59,9 @@ public class ClienteDto {
         private Sexo sexo;
         private String telefone;
         private String endereco;
+        
+        private ClienteDtoBuilder(){
+        }
 
         public ClienteDtoBuilder id(Long id) {
             this.id = id;
