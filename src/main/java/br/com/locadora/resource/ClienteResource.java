@@ -3,26 +3,32 @@ package br.com.locadora.resource;
 import br.com.locadora.dto.ClienteDto;
 import br.com.locadora.model.Cliente;
 import br.com.locadora.model.ClienteRepository;
-import br.com.locadora.util.AbstractResource;
+import br.com.locadora.model.ClienteService;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 
 @Path("clientes")
 @Stateless
-public class ClienteResource extends AbstractResource {
+@Produces("application/json")
+@Consumes("application/json")
+public class ClienteResource {
 
+    @Inject
+    private ClienteDto.RepresentationBuilder clienteDtoBuilder;
     @Inject
     private ClienteRepository clienteRepository;
     @Inject
-    private ClienteDto.RepresentationBuilder clienteDtoBuilder;
+    private ClienteService clienteService;
 
     @GET
     @Path("{id}")
@@ -43,7 +49,7 @@ public class ClienteResource extends AbstractResource {
     @POST
     public Response create(final ClienteDto dto) {
         final Cliente cliente = clienteDtoBuilder.fromRepresentation(dto, Cliente.Builder.create());
-        em.persist(cliente);
+        clienteService.persist(cliente);
         return Response.created(null).entity(clienteDtoBuilder.toRepresentation(cliente)).build();
     }
 
@@ -52,7 +58,7 @@ public class ClienteResource extends AbstractResource {
     public Response update(@PathParam("id") final Long id, final ClienteDto dto) {
         final Cliente cliente = clienteDtoBuilder.fromRepresentation(dto, Cliente.Builder.from(
                 clienteRepository.find(dto.getId())));
-        return Response.created(null).entity(clienteDtoBuilder.toRepresentation(em.merge(cliente))).build();
+        return Response.created(null).entity(clienteDtoBuilder.toRepresentation(clienteService.merge(cliente))).build();
     }
 
     @DELETE

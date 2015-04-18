@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 public class ClienteTest {
 
     @Test
-    public void testDefault() {
+    public void testBuilder() {
         final String nome = "JOAO SILVA";
         final String telefone = "9944-5588";
         final Sexo sexo = Sexo.MASCULINO;

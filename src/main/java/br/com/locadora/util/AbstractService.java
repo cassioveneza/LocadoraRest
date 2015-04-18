@@ -2,14 +2,18 @@ package br.com.locadora.util;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.Produces;
 
-@Produces("application/json")
-@Consumes("application/json")
-public abstract class AbstractResource {
+public abstract class AbstractService <T> {
 
     @PersistenceContext
     protected EntityManager em;
+    
+    public void persist(T t) {
+        em.persist(t);
+    }
+    
+    public T merge(T t) {
+        return em.merge(t);
+    }
 
 }
