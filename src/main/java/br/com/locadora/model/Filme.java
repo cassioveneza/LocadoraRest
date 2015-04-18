@@ -1,6 +1,7 @@
 package br.com.locadora.model;
 
-import br.com.locadora.util.AbstractModel;
+import br.com.locadora.util.AbstractBuilder;
+import br.com.locadora.util.AbstractEntityId;
 import java.math.BigDecimal;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,7 +13,7 @@ import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
 @Entity(name = "FILMES")
-public class Filme implements AbstractModel {
+public class Filme implements AbstractEntityId {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -67,39 +68,37 @@ public class Filme implements AbstractModel {
         this.precoUnitario = precoUnitario;
     }
 
-    public static class Builder {
+    public static class Builder extends AbstractBuilder<Filme, Builder> {
 
-        private final Filme filme;
-
-        private Builder() {
-            this.filme = new Filme();
+        private Builder(Filme filme) {
+            super(filme);
         }
 
         public static Builder create() {
-            return new Builder();
+            return new Builder(new Filme());
         }
 
-        public Filme build() {
-            return filme;
+        public static Builder from(Filme filme) {
+            return new Builder(filme);
         }
 
         public Builder id(Long id) {
-            filme.setId(id);
+            entity.setId(id);
             return this;
         }
 
         public Builder nome(String nome) {
-            filme.setNome(nome);
+            entity.setNome(nome);
             return this;
         }
 
         public Builder genero(Genero genero) {
-            filme.setGenero(genero);
+            entity.setGenero(genero);
             return this;
         }
 
         public Builder precoUnitario(BigDecimal precoUnitario) {
-            filme.setPrecoUnitario(precoUnitario);
+            entity.setPrecoUnitario(precoUnitario);
             return this;
         }
     }

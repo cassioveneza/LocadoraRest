@@ -1,6 +1,7 @@
 package br.com.locadora.model;
 
-import br.com.locadora.util.AbstractModel;
+import br.com.locadora.util.AbstractBuilder;
+import br.com.locadora.util.AbstractEntityId;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -16,7 +17,7 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
 @Entity(name = "CLIENTES")
-public class Cliente implements AbstractModel {
+public class Cliente implements AbstractEntityId {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -85,7 +86,7 @@ public class Cliente implements AbstractModel {
     private void setEndereco(String endereco) {
         this.endereco = endereco;
     }
-    
+
     public List<Locacao> getLocacoes() {
         return locacoes;
     }
@@ -94,44 +95,42 @@ public class Cliente implements AbstractModel {
         this.locacoes = locacoes;
     }
 
-    public static class Builder {
-
-        private final Cliente cliente;
-
-        private Builder() {
-            this.cliente = new Cliente();
+    public static class Builder extends AbstractBuilder<Cliente, Builder> {
+        
+        private Builder(Cliente cliente) {
+            super(cliente);
         }
-
+        
         public static Builder create() {
-            return new Builder();
+            return new Builder(new Cliente());
         }
-
-        public Cliente build() {
-            return cliente;
+        
+        public static Builder from(Cliente cliente) {
+            return new Builder(cliente);
         }
 
         public Builder id(Long id) {
-            cliente.setId(id);
+            entity.setId(id);
             return this;
         }
 
         public Builder nome(String nome) {
-            cliente.setNome(nome);
+            entity.setNome(nome);
             return this;
         }
 
         public Builder sexo(Sexo sexo) {
-            cliente.setSexo(sexo);
+            entity.setSexo(sexo);
             return this;
         }
 
         public Builder telefone(String telefone) {
-            cliente.setTelefone(telefone);
+            entity.setTelefone(telefone);
             return this;
         }
 
         public Builder endereco(String endereco) {
-            cliente.setEndereco(endereco);
+            entity.setEndereco(endereco);
             return this;
         }
     }

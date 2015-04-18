@@ -4,7 +4,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-public abstract class AbstractRepository<T extends AbstractModel> {
+public abstract class AbstractRepository<T extends AbstractEntityId> {
 
     @PersistenceContext
     protected EntityManager em;

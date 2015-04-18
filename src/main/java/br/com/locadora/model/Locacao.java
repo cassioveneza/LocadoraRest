@@ -1,6 +1,7 @@
 package br.com.locadora.model;
 
-import br.com.locadora.util.AbstractModel;
+import br.com.locadora.util.AbstractBuilder;
+import br.com.locadora.util.AbstractEntityId;
 import br.com.locadora.util.JsonDateDeserializer;
 import br.com.locadora.util.JsonDateSerializer;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -20,7 +21,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity(name = "LOCACOES")
-public class Locacao implements AbstractModel {
+public class Locacao implements AbstractEntityId {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -89,49 +90,47 @@ public class Locacao implements AbstractModel {
         this.itens.remove(item);
     }
 
-    public static class Builder {
+    public static class Builder extends AbstractBuilder<Locacao, Builder> {
 
-        private final Locacao locacao;
-
-        private Builder() {
-            this.locacao = new Locacao();
+        private Builder(Locacao locacao) {
+            super(locacao);
         }
 
         public static Builder create() {
-            return new Builder();
+            return new Builder(new Locacao());
         }
 
-        public Locacao build() {
-            return locacao;
+        public static Builder from(Locacao locacao) {
+            return new Builder(locacao);
         }
 
         public Builder id(Long id) {
-            locacao.setId(id);
+            entity.setId(id);
             return this;
         }
 
         public Builder data(LocalDate data) {
-            locacao.setData(data);
+            entity.setData(data);
             return this;
         }
 
         public Builder cliente(Cliente cliente) {
-            locacao.setCliente(cliente);
+            entity.setCliente(cliente);
             return this;
         }
 
         public Builder observacao(String observacao) {
-            locacao.setObservacao(observacao);
+            entity.setObservacao(observacao);
             return this;
         }
 
         public Builder adicionaItem(ItemLocacao item) {
-            locacao.adicionaItem(item);
+            entity.adicionaItem(item);
             return this;
         }
 
         public Builder removeItem(ItemLocacao item) {
-            locacao.removeItem(item);
+            entity.removeItem(item);
             return this;
         }
 
