@@ -22,11 +22,11 @@ public class ClienteResource extends AbstractResource {
     @Inject
     private ClienteRepository clienteRepository;
     @Inject
-    private ClienteDto.DtoBuilder clienteDtoBuilder;
+    private ClienteDto.RepresentationBuilder clienteDtoBuilder;
 
     @GET
     @Path("{id}")
-    public Response find(@PathParam("id") Long id) {
+    public Response find(@PathParam("id") final Long id) {
         final Cliente cliente = clienteRepository.find(id);
         if (cliente == null) {
             return Response.status(Response.Status.NOT_FOUND).build();
@@ -41,22 +41,23 @@ public class ClienteResource extends AbstractResource {
     }
 
     @POST
-    public Response create(ClienteDto dto) {
-        final Cliente cliente = clienteDtoBuilder.fromRepresentation(dto);
+    public Response create(final ClienteDto dto) {
+        final Cliente cliente = clienteDtoBuilder.fromRepresentation(dto, Cliente.Builder.create());
         em.persist(cliente);
         return Response.created(null).entity(clienteDtoBuilder.toRepresentation(cliente)).build();
     }
 
     @PUT
     @Path("{id}")
-    public Response update(@PathParam("id") Long id, ClienteDto dto) {
-        final Cliente cliente = clienteDtoBuilder.fromRepresentation(dto);
+    public Response update(@PathParam("id") final Long id, final ClienteDto dto) {
+        final Cliente cliente = clienteDtoBuilder.fromRepresentation(dto, Cliente.Builder.from(
+                clienteRepository.find(dto.getId())));
         return Response.created(null).entity(clienteDtoBuilder.toRepresentation(em.merge(cliente))).build();
     }
 
     @DELETE
     @Path("{id}")
-    public Response remove(@PathParam("id") Long id) {
+    public Response remove(@PathParam("id") final Long id) {
         clienteRepository.removeById(id);
         return Response.noContent().build();
     }

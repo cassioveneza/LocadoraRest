@@ -33,7 +33,8 @@ public class FilmeResourceIT extends AbstractResourceIT {
                 .build();
 
         WebTarget target = client.target(URI.create(Api.Filmes.SELF));
-        Response response = target.request().post(Entity.entity(filmeDto, MediaType.APPLICATION_JSON), Response.class);
+        final Entity<FilmeDto> entity = Entity.entity(filmeDto, MediaType.APPLICATION_JSON);
+        Response response = target.request().post(entity, Response.class);
         Assert.assertEquals(response.getStatus(), Response.Status.CREATED.getStatusCode());
 
         FilmeDto filmeResponse = response.readEntity(FilmeDto.class);
