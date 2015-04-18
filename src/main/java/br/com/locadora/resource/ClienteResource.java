@@ -64,7 +64,7 @@ public class ClienteResource {
     @DELETE
     @Path("{id}")
     public Response remove(@PathParam("id") final Long id) {
-        clienteRepository.removeById(id);
+        clienteService.remove(clienteRepository.find(id));
         return Response.noContent().build();
     }
 

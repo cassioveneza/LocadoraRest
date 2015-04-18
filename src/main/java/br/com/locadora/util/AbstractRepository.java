@@ -14,15 +14,7 @@ public abstract class AbstractRepository<T extends AbstractEntityId> {
     public AbstractRepository(Class<T> entityClass) {
         this.entityClass = entityClass;
     }
-
-    public void remove(T entity) {
-        em.remove(em.merge(entity));
-    }
-
-    public void removeById(Long id) {
-        em.remove(em.merge(find(id)));
-    }
-
+    
     public T find(Object id) {
         return em.find(entityClass, id);
     }
