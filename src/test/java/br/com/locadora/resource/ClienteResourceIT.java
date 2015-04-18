@@ -9,12 +9,22 @@ import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.RunAsClient;
+import org.jboss.shrinkwrap.api.ShrinkWrap;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 @Test
 public class ClienteResourceIT extends AbstractResourceIT {
+
+    @Deployment
+    public static WebArchive createDeployment() {
+        final WebArchive archive = ShrinkWrap.create(WebArchive.class, "test.war")
+                .addClasses(Cliente.class, ClienteDto.class, ClienteResource.class);
+        return archive;
+    }
 
     @Test
     @RunAsClient
