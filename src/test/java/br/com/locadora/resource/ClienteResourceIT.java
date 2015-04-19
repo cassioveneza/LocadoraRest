@@ -1,10 +1,9 @@
 package br.com.locadora.resource;
 
-import br.com.locadora.util.AbstractResourceIT;
 import br.com.locadora.dto.ClienteDto;
 import br.com.locadora.model.Cliente;
 import br.com.locadora.model.Sexo;
-import java.net.URI;
+import br.com.locadora.util.AbstractResourceIT;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
@@ -19,11 +18,16 @@ import org.testng.annotations.Test;
 @Test
 public class ClienteResourceIT extends AbstractResourceIT {
 
-    @Deployment
+    @Deployment(testable = false)
     public static WebArchive createDeployment() {
         final WebArchive archive = ShrinkWrap.create(WebArchive.class, "test.war")
                 .addClasses(Cliente.class, ClienteDto.class, ClienteResource.class);
         return archive;
+    }
+
+    @Override
+    public String getURI() {
+        return Api.Clientes.SELF;
     }
 
     @Test
@@ -43,7 +47,7 @@ public class ClienteResourceIT extends AbstractResourceIT {
                 .endereco(endereco)
                 .build();
 
-        WebTarget target = client.target(URI.create(Api.Clientes.SELF));
+//        WebTarget target = client.target(URI.create(Api.Clientes.SELF));
         Response response = target.request().post(Entity.entity(clienteDto, MediaType.APPLICATION_JSON), Response.class);
         Assert.assertEquals(response.getStatus(), Response.Status.CREATED.getStatusCode());
 
@@ -61,7 +65,7 @@ public class ClienteResourceIT extends AbstractResourceIT {
                 .build();
 
         //TODO: Ajustar para buscar pelo parametro {id}
-        WebTarget targetResource = client.target(target.getUriBuilder()).path("/" + clienteCreated.getId());
+        WebTarget targetResource = target.path(clienteCreated.getId().toString());
 
         response = targetResource.request().put(Entity.entity(clienteAlterado, MediaType.APPLICATION_JSON));
         Assert.assertEquals(response.getStatus(), Response.Status.CREATED.getStatusCode());

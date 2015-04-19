@@ -1,16 +1,19 @@
 package br.com.locadora.util;
 
-import javax.ws.rs.client.Client;
+import java.net.URI;
 import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.WebTarget;
 import org.testng.annotations.BeforeClass;
 
 public abstract class AbstractResourceIT {
 
-    protected Client client;
+    protected WebTarget target;
 
     @BeforeClass
     protected void createClient() {
-        client = ClientBuilder.newClient();
+        target = ClientBuilder.newClient().target(URI.create(getURI()));
     }
+
+    public abstract String getURI();
 
 }
