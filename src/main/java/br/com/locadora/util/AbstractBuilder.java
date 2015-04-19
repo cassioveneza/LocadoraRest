@@ -5,7 +5,6 @@ import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import javax.validation.Validation;
 import javax.validation.Validator;
-import javax.validation.ValidatorFactory;
 
 public abstract class AbstractBuilder<T, B extends AbstractBuilder> {
 
@@ -24,13 +23,13 @@ public abstract class AbstractBuilder<T, B extends AbstractBuilder> {
             throw new ConstraintViolationException(
                     message.getPropertyPath().toString().concat(": ").concat(message.getMessage()), validateEntity);
         }
-        
+
         final Set<ConstraintViolation<AbstractBuilder<T, B>>> validateBuilder = validator.validate(this);
         if (!validateBuilder.isEmpty()) {
             final ConstraintViolation<AbstractBuilder<T, B>> message = validateBuilder.iterator().next();
             throw new ConstraintViolationException(
                     message.getPropertyPath().toString().concat(": ").concat(message.getMessage()), validateBuilder);
-        }        
+        }
     }
 
     protected void beforeValidate() {

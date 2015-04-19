@@ -96,15 +96,15 @@ public class Cliente implements AbstractEntityId {
     }
 
     public static class Builder extends AbstractBuilder<Cliente, Builder> {
-        
+
         private Builder(Cliente cliente) {
             super(cliente);
         }
-        
+
         public static Builder create() {
             return new Builder(new Cliente());
         }
-        
+
         public static Builder from(Cliente cliente) {
             return new Builder(cliente);
         }

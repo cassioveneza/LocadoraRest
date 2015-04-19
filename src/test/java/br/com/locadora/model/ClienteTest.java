@@ -14,7 +14,7 @@ public class ClienteTest {
         final String endereco = "RUA GERAL";
 
         final Cliente cliente = Cliente.Builder.create()
-                                .nome(nome)
+                .nome(nome)
                 .sexo(sexo)
                 .telefone(telefone)
                 .endereco(endereco)
