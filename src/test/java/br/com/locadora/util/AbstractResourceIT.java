@@ -3,9 +3,10 @@ package br.com.locadora.util;
 import java.net.URI;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
+import org.jboss.arquillian.testng.Arquillian;
 import org.testng.annotations.BeforeClass;
 
-public abstract class AbstractResourceIT {
+public abstract class AbstractResourceIT extends Arquillian {
 
     protected WebTarget target;
 
@@ -15,5 +16,4 @@ public abstract class AbstractResourceIT {
     }
 
     public abstract String getURI();
-
 }

@@ -2,6 +2,7 @@ package br.com.locadora.resource;
 
 import br.com.locadora.dto.ClienteDto;
 import br.com.locadora.model.Cliente;
+import br.com.locadora.model.ClienteRepository;
 import br.com.locadora.model.Sexo;
 import br.com.locadora.util.AbstractResourceIT;
 import javax.ws.rs.client.Entity;
@@ -11,18 +12,18 @@ import javax.ws.rs.core.Response;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
+import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-@Test
 public class ClienteResourceIT extends AbstractResourceIT {
 
-    @Deployment(testable = false)
+    @Deployment
     public static WebArchive createDeployment() {
-        final WebArchive archive = ShrinkWrap.create(WebArchive.class, "test.war")
-                .addClasses(Cliente.class, ClienteDto.class, ClienteResource.class);
-        return archive;
+        return ShrinkWrap.create(WebArchive.class)
+                .addPackage(Cliente.class.getPackage())
+                .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
     }
 
     @Override
@@ -47,7 +48,6 @@ public class ClienteResourceIT extends AbstractResourceIT {
                 .endereco(endereco)
                 .build();
 
-//        WebTarget target = client.target(URI.create(Api.Clientes.SELF));
         Response response = target.request().post(Entity.entity(clienteDto, MediaType.APPLICATION_JSON), Response.class);
         Assert.assertEquals(response.getStatus(), Response.Status.CREATED.getStatusCode());
 
